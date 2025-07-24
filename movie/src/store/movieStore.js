@@ -34,6 +34,6 @@ export const useMode = create((set) => ({
 }));
 
 export const useSearch = create((set) => ({
-    serch: '',
+    search: '',
     setSearch: (ser) => set({serch: ser}),
 }));

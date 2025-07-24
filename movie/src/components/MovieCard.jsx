@@ -74,7 +74,7 @@ export function MovieCard () {
                         <img src={`${imgUrl}${mv.poster_path}`} />
                         <div className="bg-[#000000c1] text-white absolute w-full h-[3em] bottom-[0.5em] shadow-[0_-0.3em_0.3em_rgba(255,255,255,0.3),_0_0.3em_0.3em_rgba(255,255,255,0.3)] flex flex-col justify-center">
                             <p className="text-[20px] leading-[1] flex justify-center text-center break-keep">{mv.title}</p>
-                            {idx < 3 ?<p className="absolute bottom-[-0.5em] left-[0em] flex justify-start text-shadow-[0_0_8px_white] font-bold text-[2.5em] text-[red]">{idx+1}</p> : <div></div>}
+                            {idx < 3 ?<p className="absolute bottom-[-0.5em] left-[0em] flex justify-start text-shadow-[0_0_8px_white] font-bold text-[2.5em] text-[#003dde]">{idx+1}</p> : <div></div>}
                             <div className="flex flex-row justify-end items-end ">
                                 <p className="text-[0.65em] flex justify-end mx-2 ">★{mv.vote_average}</p>
                             </div>
