@@ -26,4 +26,14 @@ export const useDetailMovieStore = create((set) => ({
             console.error('에러:', err);
         }
     }
-}))
+}));
+
+export const useMode = create((set) => ({
+    sortMode: 'recent', 
+    setSortMode: (mode) => set({ sortMode: mode }),
+}));
+
+export const useSearch = create((set) => ({
+    serch: '',
+    setSearch: (ser) => set({serch: ser}),
+}));

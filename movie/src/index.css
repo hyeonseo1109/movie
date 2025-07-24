@@ -1,6 +1,13 @@
 @import "tailwindcss";
+/* @import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css'); */
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
+
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: system-ui, Avenir, Helvetica, Arial, sans-serif; */
+  /* font-family: 'NanumSquare', sans-serif; */
+  font-family: "Nanum Gothic", sans-serif;
   line-height: 1.5;
   font-weight: 400;
 

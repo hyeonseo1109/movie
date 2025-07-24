@@ -16,11 +16,11 @@
 .box:hover {
   transform: scale(1.05);
   box-shadow: 0 0 15em black;
-  transition: 0.3s
+  transition: 0.2s
 }
 
 .nav {
-  background: linear-gradient(45deg, rgb(31, 31, 31), rgb(10, 17, 41));
+  background: linear-gradient(45deg, rgb(57, 57, 57), rgb(10, 17, 41));
   min-width: 100%;
 }
 
