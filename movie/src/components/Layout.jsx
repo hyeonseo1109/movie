@@ -1,5 +1,6 @@
 import { Outlet, Link } from "react-router-dom";
-import { useSearch, useNavigate } from "../store/movieStore";
+import { useSearch } from "../store/movieStore";
+import { useNavigate } from "react-router-dom";
 
 export function Layout() {
     const search = useSearch((state) => state.search);
@@ -9,24 +10,24 @@ export function Layout() {
     return (
     <div className="flex flex-col w-full ">
         <div className="flex flex-row justify-between w-full h-[4em] items-center px-10 shadow-[0_0_10px_black] nav">
-            <div>
-                {/* <p className="text-[1.5em]">𝙊𝙣𝙏𝙝𝙚𝙎𝙤𝙛𝙖</p> */}
-                <p className="text-[2em] font-extrabold text-white tracking-[-5px]">MovieTopia</p>
-            </div>
-            <div className="flex flex-row gap-7">
+            <nav>
+                <Link
+                    to="/"
+                    className="text-[2em] font-extrabold text-white tracking-[-5px]">Movie_Topia</Link>
+            </nav>
+            <div className="flex flex-row gap-7 items-center">
                 <div>
                     <input  
-                        onChange={ (e) => setSearch(e)}
-                        className="border-b border-white"/>
+                        value={search}
+                        onChange={ (e) => setSearch(e.target.value)}
+                        className="border-b border-white text-white"/>
                     <span
-                        onClick={ () => navigate(`/serch?movie=${search}`)}
-                        className="inline-block transform rotate-[110deg] text-white font-extrabold">☌</span>
+                        onClick={ () => {
+                            navigate(`/search?movie=${search}`);
+                            setSearch('');
+                        }}
+                        className="inline-block transform rotate-[110deg] text-white font-extrabold text-[1.3em]">☌</span>
                 </div>
-                <nav>
-                    <Link 
-                        className="text-white flex"
-                        to="/">메인</Link>
-                </nav>
             </div>
         </div>
 

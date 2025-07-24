@@ -5,26 +5,11 @@ import { Link } from "react-router-dom";
 export function MovieCard () {
     const movies = useMovieStore( state => state.movies );
     const fetchMovies = useMovieStore( state => state.fetchMovies);
-    // const isVote = useVote( state => state.isVote);
-    // const setIsVote = useVote( state => state.setIsVote);
-
-    // const isRecent= useVote( state => state.isRecent);
-    // const setIsRecent= useVote( state => state.setIsRecent);
-
-    // const isPopular= useVote( state => state.isPopular);
-    // const setIsPopular= useVote( state => state.setIsPopular);
     const sortMode = useMode(state => state.sortMode);
     const setSortMode = useMode(state => state.setSortMode);
 
     const sortedMovies = [...movies];
 
-    // if(isVote) {
-    //     sortedMovies.sort((a,b) => b.vote_average - a.vote_average);
-    // } else if (isRecent) {
-    //     sortedMovies.sort( (a,b) => new Date(b.release_date) - new Date(a.release_date))
-    // } else if (isPopular) { 
-    //     sortedMovies.sort( (a,b) => b.popularity - a.popularity);
-    // }
     if (sortMode === 'vote') {
     sortedMovies.sort((a,b) => b.vote_average - a.vote_average);
     } else if (sortMode === 'recent') {
