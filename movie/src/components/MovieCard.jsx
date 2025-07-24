@@ -13,6 +13,7 @@ export function MovieCard () {
 
     return (
     <div className="flex flex-wrap gap-6 p-4 justify-center">
+        
         {movies ? movies.map( (mv) => (
             <Link
                 to={`/detail/${mv.id}`}

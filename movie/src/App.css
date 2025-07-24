@@ -1,5 +1,5 @@
 #root {
-  max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -22,4 +22,16 @@
 .nav {
   background: linear-gradient(45deg, rgb(54, 54, 54), rgb(31, 31, 31));
   min-width: 100%;
+}
+
+.detail {
+  min-width: 40em;
+
+}
+
+@media (max-width: 60em) {
+  .detail {
+    width: 100%;
+    margin: 0;
+  }
 }
