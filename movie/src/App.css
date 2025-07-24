@@ -20,18 +20,18 @@
 }
 
 .nav {
-  background: linear-gradient(45deg, rgb(54, 54, 54), rgb(31, 31, 31));
+  background: linear-gradient(45deg, rgb(31, 31, 31), rgb(10, 17, 41));
   min-width: 100%;
 }
 
-.detail {
+/* .detail {
   min-width: 40em;
 
-}
+} */
 
-@media (max-width: 60em) {
+/* @media (max-width: 60em) {
   .detail {
     width: 100%;
     margin: 0;
   }
-}
+} */

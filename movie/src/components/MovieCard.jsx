@@ -12,7 +12,7 @@ export function MovieCard () {
     }, [fetchMovies]);
 
     return (
-    <div className="flex flex-wrap gap-6 p-4 justify-center">
+    <div className="flex flex-wrap gap-6 p-4 justify-center my-5">
         
         {movies ? movies.map( (mv) => (
             <Link
