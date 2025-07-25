@@ -40,10 +40,10 @@ export function DetailMovieCard () {
                 </div>
                 <div>
                     <div className="relative w-[50em] mx-auto">
-                        <img
+                        {detailMovies.backdrop_path ? (<img
                             className="w-full h-auto"
                             alt="배경이미지"
-                            src={`https://image.tmdb.org/t/p/w500/${detailMovies.backdrop_path}`} />
+                            src={`https://image.tmdb.org/t/p/w500/${detailMovies.backdrop_path}`} />) : <div className="w-full h-auto bg-white"></div>}
                         <div 
                             className="
                             bg-[linear-gradient(180deg,rgb(0,0,0,0)1%,rgb(0,0,0,0.2)10%,rgb(0,0,0,0.55)30%,rgb(0,0,0,0.75)50%,rgb(0,0,0,0.98)80%)]

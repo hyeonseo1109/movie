@@ -1,17 +1,25 @@
 import { create } from "zustand";
+import { adultKeywords } from "../../keywordFilter";
 
+
+//영화 정보
 export const useMovieStore = create((set) => ({
     movies: [],
     setMovies: (newMovie) => set({movies: newMovie}),
     fetchMovies: async () => {
         try {
-            const res = await fetch('https://api.themoviedb.org/3/movie/popular?page=1&language=ko-KR',{
+            const res = await fetch('https://api.themoviedb.org/3/movie/popular?page=4&language=ko-KR',{
                 headers: {
                     Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`,
                 },
             });
             const data = await res.json()
-            const filtered = data.results.filter((mv) => !mv.adult&&mv.title!=="性教育ママ");
+            const filtered = data.results.filter((mv) => {
+                const combinedText = `${mv.title} ${mv.original_title} ${mv.overview || ""}`.toLowerCase().replace(/\s/g, ""); // 괄호 안에 저건 global플래그로 문자열 전체에서 '\s', 즉 공백을 찾아서 ""로 만든다는 거.)
+                return (    
+                    !mv.adult && !adultKeywords.some((kw) => combinedText.includes(kw)) //some: 안에 조건을 만족하는 요소가 하나라도 있는지
+                );
+            });
             console.log('성인제외:',filtered);
             set({ movies: filtered});
         } catch (err) {
@@ -20,6 +28,8 @@ export const useMovieStore = create((set) => ({
     }
 }))
 
+
+// 영화 상세 정보 
 export const useDetailMovieStore = create((set) => ({
     detailMovies: null,
     setDetailMovies: (newMovie) => set({detailMovies: newMovie}),
@@ -40,12 +50,22 @@ export const useDetailMovieStore = create((set) => ({
 }))
 
 
+// 별점순 / 최신순 / 인기순
 export const useMode = create((set) => ({
     sortMode: 'recent', 
     setSortMode: (mode) => set({ sortMode: mode }),
 }));
 
+
+// 검색
 export const useSearch = create((set) => ({
     search: '',
     setSearch: (ser) => set({search: ser}),
+}));
+
+
+// 페이지 몇 번째인지
+export const usePage = create((set) => ({
+    page: '1', 
+    setPage: (num) => set({ page: num }),
 }));

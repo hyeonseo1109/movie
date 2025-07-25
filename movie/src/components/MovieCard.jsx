@@ -92,6 +92,9 @@ export function MovieCard () {
     const fetchMovies = useMovieStore( state => state.fetchMovies);
     const sortMode = useMode(state => state.sortMode);
     const setSortMode = useMode(state => state.setSortMode);
+    // const page = useMode(state => state.page);
+    // const setPage = useMode(state => state.setPage);
+
 
     const sortedMovies = [...movies];
 
@@ -179,7 +182,7 @@ export function MovieCard () {
                 </SwiperSlide>
             ))}
             </Swiper>
-<div className="flex flex-wrap gap-6 p-4 justify-center my-5">
+        <div className="flex flex-wrap gap-6 p-4 justify-center my-5">
             {sortedMovies ? sortedMovies.slice(5).map( (mv) => (
                 <Link
                     to={`/detail/${mv.id}`}
@@ -196,7 +199,13 @@ export function MovieCard () {
                 </Link>  
                     
             )) : (<div>영화 정보가 없습니다.</div>)}
-
+        </div>
+        <div className="flex justify-center gap-4 my-[2em_10em]">
+            <button className="flex bg-[gray] text-[1.3em] text-white font-bold w-[1.3em] h-[1.3em] items-center justify-center rounded-[0.3em]">1</button>
+            <button className="flex bg-[gray] text-[1.3em] text-white font-bold w-[1.3em] h-[1.3em] items-center justify-center rounded-[0.3em]">2</button>
+            <button className="flex bg-[gray] text-[1.3em] text-white font-bold w-[1.3em] h-[1.3em] items-center justify-center rounded-[0.3em]">3</button>
+            <button className="flex bg-[gray] text-[1.3em] text-white font-bold w-[1.3em] h-[1.3em] items-center justify-center rounded-[0.3em]">4</button>
+            <button className="flex bg-[gray] text-[1.3em] text-white font-bold w-[1.3em] h-[1.3em] items-center justify-center rounded-[0.3em]">5</button>
         </div>
     </div>
     )
