@@ -1,0 +1,52 @@
+#root {
+  width: 100%;
+  margin: 0 auto;
+}
+
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+
+.box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 2.8em black;
+  transition: 0.2s;
+  position: relative;
+  z-index: 10;
+}
+
+.nav {
+  /* background: linear-gradient(45deg, rgb(57, 57, 57), rgb(10, 17, 41)); */
+  /* background: linear-gradient(45deg, rgb(17, 21, 148), rgb(10, 17, 41)); */
+  background: linear-gradient(45deg, rgb(9, 12, 96), rgb(38, 14, 98));
+  min-width: 100%;
+}
+@media (max-width: 600px) {
+  .input {
+    width: 5em;
+  }
+}
+
+@media (max-width: 1000px) {
+  .detailCard {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 750px) {
+  .detailCard {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .detailCard {
+    font-size: 9px;
+  }
+}
