@@ -152,7 +152,7 @@ export function MovieCard () {
                 autoplay={{
                     delay: 3000,
                     disableOnInteraction: false, 
-                    //사용작가 컨트롤바로 이동시킨 후에도 자동전환 진행
+                    //사용자가 컨트롤바로 이동시킨 후에도 자동전환 진행
                 }}
                 
             >

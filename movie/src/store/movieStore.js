@@ -5,9 +5,15 @@ export const useMovieStore = create((set) => ({
     setMovies: (newMovie) => set({movies: newMovie}),
     fetchMovies: async () => {
         try {
-            const res = await fetch('/data/movieListData.json')
+            const res = await fetch('https://api.themoviedb.org/3/movie/popular?language=ko-KR',{
+                headers: {
+                    Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`,
+                },
+            });
             const data = await res.json()
-            set({ movies: data.results});
+            const filtered = data.results.filter((mv) => !mv.adult&&mv.title!=="性教育ママ");
+            console.log(filtered);
+            set({ movies: filtered});
         } catch (err) {
             console.error('에러:', err);
         }
