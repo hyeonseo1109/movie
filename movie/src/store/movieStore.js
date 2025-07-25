@@ -1,14 +1,15 @@
 import { create } from "zustand";
 import { adultKeywords } from "../../keywordFilter";
+    // const page = usePage( state => state.page );
 
 
 //영화 정보
 export const useMovieStore = create((set) => ({
     movies: [],
     setMovies: (newMovie) => set({movies: newMovie}),
-    fetchMovies: async () => {
+    fetchMovies: async (page = 1) => {
         try {
-            const res = await fetch('https://api.themoviedb.org/3/movie/popular?page=4&language=ko-KR',{
+            const res = await fetch(`https://api.themoviedb.org/3/movie/popular?page=${page}&language=ko-KR`,{
                 headers: {
                     Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`,
                 },
@@ -66,6 +67,6 @@ export const useSearch = create((set) => ({
 
 // 페이지 몇 번째인지
 export const usePage = create((set) => ({
-    page: '1', 
+    page: 1, 
     setPage: (num) => set({ page: num }),
 }));
