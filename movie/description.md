@@ -33,3 +33,8 @@ arr.sort( (a,b) => b.vote_average - a.vote_average)
 
 미디어쿼리 확인
 상세정보창 줄어들었을 떄 타이틀 / 평점 / 런타임 위치 이상함
+
+
+귀칼 런타임 0분임  detailmovie.runtiem 0일 경우 아예 안 뜨게 ㄱㄱ
+
+페이지 번호 만들어서 패치 주소에 변수 넣어서 연결 ㄱㄱ

@@ -5,14 +5,14 @@ export const useMovieStore = create((set) => ({
     setMovies: (newMovie) => set({movies: newMovie}),
     fetchMovies: async () => {
         try {
-            const res = await fetch('https://api.themoviedb.org/3/movie/popular?language=ko-KR',{
+            const res = await fetch('https://api.themoviedb.org/3/movie/popular?page=1&language=ko-KR',{
                 headers: {
                     Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`,
                 },
             });
             const data = await res.json()
             const filtered = data.results.filter((mv) => !mv.adult&&mv.title!=="性教育ママ");
-            console.log(filtered);
+            console.log('성인제외:',filtered);
             set({ movies: filtered});
         } catch (err) {
             console.error('에러:', err);
@@ -31,7 +31,7 @@ export const useDetailMovieStore = create((set) => ({
                 },
             });
             const data = await res.json()
-            console.log(data);
+            console.log('상세데이터:', data);
             set({ detailMovies: data});
         } catch (err) {
             console.error('에러:', err);
