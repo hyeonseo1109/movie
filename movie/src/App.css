@@ -22,18 +22,31 @@
 }
 
 .nav {
-  background: linear-gradient(45deg, rgb(57, 57, 57), rgb(10, 17, 41));
+  /* background: linear-gradient(45deg, rgb(57, 57, 57), rgb(10, 17, 41)); */
+  /* background: linear-gradient(45deg, rgb(17, 21, 148), rgb(10, 17, 41)); */
+  background: linear-gradient(45deg, rgb(9, 12, 96), rgb(38, 14, 98));
   min-width: 100%;
 }
-
-/* .detail {
-  min-width: 40em;
-
-} */
-
-/* @media (max-width: 60em) {
-  .detail {
-    width: 100%;
-    margin: 0;
+@media (max-width: 600px) {
+  .input {
+    width: 5em;
   }
-} */
+}
+
+@media (max-width: 1000px) {
+  .detailCard {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 750px) {
+  .detailCard {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .detailCard {
+    font-size: 9px;
+  }
+}

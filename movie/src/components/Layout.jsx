@@ -20,7 +20,7 @@ export function Layout() {
                     <input  
                         value={search}
                         onChange={ (e) => setSearch(e.target.value)}
-                        className="border-b border-white text-white"/>
+                        className="border-b border-white text-white input"/>
                     <span
                         onClick={ () => {
                             navigate(`/search?movie=${search}`);

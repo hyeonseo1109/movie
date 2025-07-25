@@ -14,9 +14,8 @@
   /* color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424; */
-  background: linear-gradient(85deg, rgb(0, 0, 0), rgb(70, 70, 70));
+  background: linear-gradient(85deg, rgb(13, 13, 13), rgb(70, 70, 70));
   width: 100%;
-  /*나중에 다 정리되면 풀기*/
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

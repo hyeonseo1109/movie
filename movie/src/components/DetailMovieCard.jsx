@@ -28,14 +28,14 @@ export function DetailMovieCard () {
 
     return (
     <div className="flex flex-wrap gap-4 p-4 mx-5 my-5 justify-center">
-            <div key={detailMovies.id} className="bg-black shadow-[0_0_15px_#000000c1] text-white flex flex-col  detail w-[70em]">
+            <div key={detailMovies.id} className="bg-black shadow-[0_0_15px_#000000c1] text-white flex flex-col  detail w-[70em] detailCard">
                 <div 
                     onClick={() => navigate(-1)}
                     className="font-bold text-[gray] text-[1.3em]"
                 >🅧</div>
                 <div className="flex flex-row gap-6 m-4 justify-center">
                     {detailMovies.genres.map((gr) => <div 
-                        key={detailMovies.genres.id}
+                        key={gr.id}
                         className="text-[#fff] text-[0.95em] p-0.5 border-b border-[#bfbfbf]">#{gr.name}</div>)}
                 </div>
                 <div>
