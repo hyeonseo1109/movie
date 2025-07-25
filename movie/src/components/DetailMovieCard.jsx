@@ -34,7 +34,9 @@ export function DetailMovieCard () {
                     className="font-bold text-[gray] text-[1.3em]"
                 >🅧</div>
                 <div className="flex flex-row gap-6 m-4 justify-center">
-                    {detailMovies.genres.map((gr) => <div className="text-[#fff] text-[0.95em] p-0.5 border-b border-[#bfbfbf]">#{gr.name}</div>)}
+                    {detailMovies.genres.map((gr) => <div 
+                        key={detailMovies.genres.id}
+                        className="text-[#fff] text-[0.95em] p-0.5 border-b border-[#bfbfbf]">#{gr.name}</div>)}
                 </div>
                 <div>
                     <div className="relative w-[50em] mx-auto">
@@ -58,7 +60,7 @@ export function DetailMovieCard () {
                             alt="작은사진"
                             className="aspect-[2/3] w-[9em] h-auto absolute top-[14em] left-[2em] shadow-[0_0_15px_black]"
                             src={`https://image.tmdb.org/t/p/w500/xoYc0RYKSc3xC4S9OpPZxKocKtj.jpg`} />
-                        <div className="m-3 leading-7">
+                        <div className="m-3 leading-7 break-keep">
                             {detailMovies.overview}
                         </div>
                     </div>
