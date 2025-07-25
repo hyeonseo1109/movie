@@ -26,6 +26,7 @@
   /* background: linear-gradient(45deg, rgb(17, 21, 148), rgb(10, 17, 41)); */
   background: linear-gradient(45deg, rgb(9, 12, 96), rgb(38, 14, 98));
   min-width: 100%;
+  
 }
 @media (max-width: 600px) {
   .input {

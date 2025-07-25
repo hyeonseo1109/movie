@@ -28,7 +28,7 @@ export function DetailMovieCard () {
 
     return (
     <div className="flex flex-wrap gap-4 p-4 mx-5 my-5 justify-center">
-            <div key={detailMovies.id} className="bg-black shadow-[0_0_15px_#000000c1] text-white flex flex-col  detail w-[70em] detailCard">
+            <div key={detailMovies.id} className="bg-black shadow-[0_0_15px_#333] text-white flex flex-col  detail w-[70em] detailCard">
                 <div 
                     onClick={() => navigate(-1)}
                     className="font-bold text-[gray] text-[1.3em]"
