@@ -11,8 +11,8 @@ export function DetailMovieCard () {
     const navigate = useNavigate();
 
     useEffect( () => {
-        fetchDetailMovies(1011985);
-    }, [fetchDetailMovies]);
+        fetchDetailMovies(id);
+    }, [fetchDetailMovies, id]);
     //나중에 id로 숫자 넘기는 거 바꾸기
     //지금은 어떤 영화를 눌러도 다 쿵푸팬더가 떠야 되니까 쿵푸팬더 아이디를 넘김
 
@@ -36,14 +36,14 @@ export function DetailMovieCard () {
                 <div className="flex flex-row gap-6 m-4 justify-center">
                     {detailMovies.genres.map((gr) => <div 
                         key={gr.id}
-                        className="text-[#fff] text-[0.95em] p-0.5 border-b border-[#bfbfbf]">#{gr.name}</div>)}
+                        className="text-[#fff] text-[0.95em] p-0.5 border-b border-[#bfbfbf]">#{gr?.name}</div>)}
                 </div>
                 <div>
                     <div className="relative w-[50em] mx-auto">
                         <img
                             className="w-full h-auto"
                             alt="배경이미지"
-                            src={`https://image.tmdb.org/t/p/w500/uDosHOFFWtF5YteBRygHALFqLw2.jpg`} />
+                            src={`https://image.tmdb.org/t/p/w500/${detailMovies.backdrop_path}`} />
                         <div 
                             className="
                             bg-[linear-gradient(180deg,rgb(0,0,0,0)1%,rgb(0,0,0,0.2)10%,rgb(0,0,0,0.55)30%,rgb(0,0,0,0.75)50%,rgb(0,0,0,0.98)80%)]
@@ -59,7 +59,7 @@ export function DetailMovieCard () {
                         <img
                             alt="작은사진"
                             className="aspect-[2/3] w-[9em] h-auto absolute top-[14em] left-[2em] shadow-[0_0_15px_black]"
-                            src={`https://image.tmdb.org/t/p/w500/xoYc0RYKSc3xC4S9OpPZxKocKtj.jpg`} />
+                            src={`https://image.tmdb.org/t/p/w500/${detailMovies.poster_path}`} />
                         <div className="m-3 leading-7 break-keep">
                             {detailMovies.overview}
                         </div>
