@@ -7,22 +7,27 @@ import { adultKeywords } from "../../keywordFilter";
 export const useMovieStore = create((set) => ({
     movies: [],
     setMovies: (newMovie) => set({movies: newMovie}),
-    fetchMovies: async (page = 1) => {
+    fetchMovies: async () => {
         try {
+            let allMovies = [];
+
+            for (let page = 1; page <= 10; page++) {
             const res = await fetch(`https://api.themoviedb.org/3/movie/popular?page=${page}&language=ko-KR`,{
                 headers: {
                     Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`,
                 },
             });
-            const data = await res.json()
+            const data = await res.json();
             const filtered = data.results.filter((mv) => {
                 const combinedText = `${mv.title} ${mv.original_title} ${mv.overview || ""}`.toLowerCase().replace(/\s/g, ""); // 괄호 안에 저건 global플래그로 문자열 전체에서 '\s', 즉 공백을 찾아서 ""로 만든다는 거.)
                 return (    
-                    !mv.adult && !adultKeywords.some((kw) => combinedText.includes(kw)) //some: 안에 조건을 만족하는 요소가 하나라도 있는지
+                    !mv.adult && mv.overview && !adultKeywords.some((kw) => combinedText.includes(kw)) //some: 안에 조건을 만족하는 요소가 하나라도 있는지
                 );
             });
-            console.log('성인제외:',filtered);
-            set({ movies: filtered});
+            allMovies = [...allMovies, ...filtered];
+            }
+            console.log('성인제외:',allMovies);
+            set({ movies: allMovies});
         } catch (err) {
             console.error('에러:', err);
         }

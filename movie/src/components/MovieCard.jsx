@@ -15,6 +15,7 @@ export function MovieCard () {
 
     const page = usePage(state => state.page);
     const setPage = usePage(state => state.setPage);
+    const moviePage = 12;
 
 
     const sortedMovies = [...movies];
@@ -27,13 +28,17 @@ export function MovieCard () {
     sortedMovies.sort((a,b) => b.popularity - a.popularity);
     }
 
+    const startIndex = (page -1) * moviePage;
+    const pagedMovies = sortedMovies.slice(startIndex, startIndex+moviePage);
+    //     만약 페이지가 4라면, 페이지당 12개씩 보여주니까 총 48개가 나와야 함.
+    // 그러니까 (4-1) *12 = 36, 그래서 slice로 인덱스 36번부터 36+12번 만큼만 보여주는 거.
 
     const imgUrl = "https://image.tmdb.org/t/p/w500";
 
 
     useEffect( () => {
-        fetchMovies(page);
-    }, [fetchMovies, page]);
+        fetchMovies();
+    }, [fetchMovies]);
 
     
 
@@ -104,7 +109,7 @@ export function MovieCard () {
             ))}
             </Swiper>
         <div className="flex flex-wrap gap-6 p-4 justify-center my-5">
-            {sortedMovies ? sortedMovies.slice(5).map( (mv) => (
+            {pagedMovies ? pagedMovies.map( (mv) => (
                 <Link
                     to={`/detail/${mv.id}`}
                     key={mv.id} className="border bg-black shadow-[0_0_15px_#000000c1] box">
@@ -122,27 +127,25 @@ export function MovieCard () {
             )) : (<div>영화 정보가 없습니다.</div>)}
         </div>
         <div className="flex justify-center gap-4 my-[2em_10em]">
-            <button 
-                onClick={() => setPage(1)}
-                className="flex bg-[gray] text-[1.3em] text-white font-bold w-[1.3em] h-[1.3em] items-center justify-center rounded-[0.3em]">1</button>
-            <button 
-                onClick={() => setPage(2)}
-                className="flex bg-[gray] text-[1.3em] text-white font-bold w-[1.3em] h-[1.3em] items-center justify-center rounded-[0.3em]">2</button>
-            <button 
-                onClick={() => setPage(3)}
-                className="flex bg-[gray] text-[1.3em] text-white font-bold w-[1.3em] h-[1.3em] items-center justify-center rounded-[0.3em]">3</button>
-            <button 
-                onClick={() => setPage(4)}
-                className="flex bg-[gray] text-[1.3em] text-white font-bold w-[1.3em] h-[1.3em] items-center justify-center rounded-[0.3em]">4</button>
-            <button 
-                onClick={() => setPage(5)}
-                className="flex bg-[gray] text-[1.3em] text-white font-bold w-[1.3em] h-[1.3em] items-center justify-center rounded-[0.3em]">5</button>
-            <button 
-                onClick={() => setPage(6)}
-                className="flex bg-[gray] text-[1.3em] text-white font-bold w-[1.3em] h-[1.3em] items-center justify-center rounded-[0.3em]">6</button>
-            <button 
-                onClick={() => setPage(7)}
-                className="flex bg-[gray] text-[1.3em] text-white font-bold w-[1.3em] h-[1.3em] items-center justify-center rounded-[0.3em]">7</button>
+            {[1,2,3,4,5,6,7,8,9,10].map((num) => (
+            <button
+                key={num}
+                onClick={() => setPage(num)}
+                style={{
+                    backgroundColor: num === page ? "rgb(19, 23, 160)" : "white",
+                    color: num === page ? "white" : "black",
+                    fontWeight: num === page ? "bold" : "normal",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: "0.3em",
+                    height: "1.5em",
+                    width: "1.5em"
+                }}
+                >
+                {num}
+                </button>
+                ))}
         </div>
     </div>
     )

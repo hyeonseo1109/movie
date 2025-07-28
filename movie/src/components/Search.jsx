@@ -36,5 +36,3 @@ export function Search() {
 }
 
 export default Search;
-
-//검색시 실시간 나오게 할겨?
