@@ -8,6 +8,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
 import { useDebounce } from "../useDebounce";
+import { useSearchParams } from "react-router-dom";
 
 export function MovieCard () {
     const movies = useMovieStore( state => state.movies );
@@ -28,18 +29,29 @@ export function MovieCard () {
     // 검색입력값이 있으면 저 fetchSearchedResults를 통해서 검색결과를 받아오고
     // 검색입력값이 없으면 그냥 fetchMovies에서 popular 영화 120개 보여주는 거.
     
-    const moviePage = 12;
+    const moviePage = 20;
 
     
     const search = useSearch(state => state.search);
     const debounceSearch = useDebounce(search);
 
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    useEffect(() => {
+        const queryParam = searchParams.get("query");
+        if (queryParam) {
+            useSearch.getState().setSearch(queryParam);
+        }
+    }, []);
+
     useEffect(() => {
         if (debounceSearch) {
             fetchSearchedResults(debounceSearch);
             setPage(1);
+            setSearchParams({ query: debounceSearch });
         } else {
             fetchMovies();
+            setSearchParams({});
         }
     }, [debounceSearch, fetchSearchedResults, fetchMovies]);
 
