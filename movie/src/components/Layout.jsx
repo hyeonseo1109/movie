@@ -1,15 +1,26 @@
 import { Outlet, Link, useSearchParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 
 export function Layout() {
     const [searchParams, setSearchParams] = useSearchParams();
-    const search = searchParams.get("query") || '';
+    const query = searchParams.get("query") || '';
+    const [input, setInput] = useState(query);
 
-    const setSearch = (value) => {
-        console.log('setSearch:', value);
-        setSearchParams(value ? { query: value } : {});
+    useEffect(() => {
+        setInput(query);
+    }, [query]);
+
+    const handleChange = (e) => {
+        const val = e.target.value;
+        setInput(val);
+        setSearchParams(val ? { query: val } : {});
     };
 
+    const clearSearch = () => {
+        setInput('');
+        setSearchParams({});
+    };
 
     return (
     <div className="flex flex-col w-full ">
@@ -18,17 +29,17 @@ export function Layout() {
                 <Link
                     to="/"
                     className="text-[2em] font-extrabold text-white tracking-[-5px]"
-                    onClick={() => setSearch('')}                
+                    onClick={clearSearch}               
                 >Movie_Topia</Link>
             </nav>
             <div className="flex flex-row gap-7 items-center">
                 <div>
                     <input  
-                        value={search}
-                        onChange={ (e) => setSearch(e.target.value)}
+                        value={input}
+                        onChange={handleChange}
                         className="border-b border-white text-white input"/>
                     <span
-                        onClick={ () => setSearch("")}
+                        onClick={clearSearch}
                         className="inline-block transform rotate-[110deg] text-white font-extrabold text-[1.3em]">☌</span>
                 </div>
             </div>
