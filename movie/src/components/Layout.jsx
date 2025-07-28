@@ -13,7 +13,9 @@ export function Layout() {
             <nav>
                 <Link
                     to="/"
-                    className="text-[2em] font-extrabold text-white tracking-[-5px]">Movie_Topia</Link>
+                    className="text-[2em] font-extrabold text-white tracking-[-5px]"
+                    onClick={() => setSearch('')}                
+                >Movie_Topia</Link>
             </nav>
             <div className="flex flex-row gap-7 items-center">
                 <div>

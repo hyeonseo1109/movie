@@ -1,11 +1,12 @@
 import { useEffect } from "react";
-import { useMovieStore, useMode, usePage} from "../store/movieStore"
+import { useMovieStore, useMode, usePage, useSearch} from "../store/movieStore"
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation, Scrollbar } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
+import { useDebounce } from "../useDebounce";
 
 export function MovieCard () {
     const movies = useMovieStore( state => state.movies );
@@ -15,10 +16,19 @@ export function MovieCard () {
 
     const page = usePage(state => state.page);
     const setPage = usePage(state => state.setPage);
+
+    const search = useSearch(state => state.search);
+    
     const moviePage = 12;
 
+    const debounceSearch = useDebounce(search, 400);
 
-    const sortedMovies = [...movies];
+    const filteredMovies = debounceSearch
+            ? ( movies.filter(mv => mv.title.toLowerCase().includes(debounceSearch.toLowerCase())) )
+            : movies;
+
+
+    const sortedMovies = [...filteredMovies];
 
     if (sortMode === 'vote') {
     sortedMovies.sort((a,b) => b.vote_average - a.vote_average);
@@ -68,7 +78,7 @@ export function MovieCard () {
         </div>
         
 
-
+        { !search && (
             <Swiper
                 modules={[Navigation, Scrollbar, Autoplay ]}
                 spaceBetween={200}
@@ -108,6 +118,7 @@ export function MovieCard () {
                 </SwiperSlide>
             ))}
             </Swiper>
+        )}
         <div className="flex flex-wrap gap-6 p-4 justify-center my-5">
             {pagedMovies ? pagedMovies.map( (mv) => (
                 <Link
