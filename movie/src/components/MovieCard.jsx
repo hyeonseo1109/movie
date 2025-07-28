@@ -1,7 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { useMovieStore, useMode, usePage } from "../store/movieStore"
 import { Link } from "react-router-dom";
-import { useSearch } from "../store/movieStore"; 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation, Scrollbar } from 'swiper/modules';
 import 'swiper/css';
@@ -32,30 +31,20 @@ export function MovieCard () {
     const moviePage = 20;
 
     
-    const search = useSearch(state => state.search);
-    const debounceSearch = useDebounce(search);
-
-    const [searchParams, setSearchParams] = useSearchParams();
-
-    useEffect(() => {
-        const queryParam = searchParams.get("query");
-        if (queryParam) {
-            useSearch.getState().setSearch(queryParam);
-        }
-    }, []);
+    const [searchParams] = useSearchParams();
+    const query = searchParams.get("query") || '';
+    const debounceQuery = useDebounce(query);
 
     useEffect(() => {
-        if (debounceSearch) {
-            fetchSearchedResults(debounceSearch);
+        if (debounceQuery) {
+            fetchSearchedResults(debounceQuery);
             setPage(1);
-            setSearchParams({ query: debounceSearch });
         } else {
             fetchMovies();
-            setSearchParams({});
         }
-    }, [debounceSearch, fetchSearchedResults, fetchMovies]);
+    }, [debounceQuery, fetchMovies, fetchSearchedResults, setPage]);
 
-    const activeMovies = debounceSearch ? searchedResults : movies;
+    const activeMovies = debounceQuery ? searchedResults : movies;
 
 
     const sortedMovies = useMemo(() => {
@@ -76,8 +65,8 @@ export function MovieCard () {
         const startIndex = (page - 1) * moviePage;
         return sortedMovies.slice(startIndex, startIndex + moviePage);
     }, [sortedMovies, page]);
-    //     만약 페이지가 4라면, 페이지당 12개씩 보여주니까 총 48개가 나와야 함.
-    // 그러니까 (4-1) *12 = 36, 그래서 slice로 인덱스 36번부터 36+12번 만큼만 보여주는 거.
+    //     만약 페이지가 4라면, 페이지당 20개씩 보여주니까 총 48개가 나와야 함.
+    // 그러니까 (4-1) *20 = 60, 그래서 slice로 인덱스 60번부터 60+12번 만큼만 보여주는 거.
 
     const imgUrl = "https://image.tmdb.org/t/p/w500";
 
@@ -109,7 +98,7 @@ export function MovieCard () {
         </div>
         
 
-        { !debounceSearch && (
+        { !debounceQuery && (
                 <Swiper
                     modules={[Navigation, Scrollbar, Autoplay]}
                     navigation
@@ -117,7 +106,7 @@ export function MovieCard () {
                     centeredSlides={true}
                     grabCursor={true}
                     autoplay={{
-                        delay: 1000,
+                        delay: 2000,
                         disableOnInteraction: false,
                     }}
                     // loop={true} 

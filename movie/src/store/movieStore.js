@@ -81,11 +81,11 @@ export const useMode = create((set) => ({
 }));
 
 
-// 검색
-export const useSearch = create((set) => ({
-    search: '',
-    setSearch: (ser) => set({search: ser}),
-}));
+// // 검색
+// export const useSearch = create((set) => ({
+//     search: '',
+//     setSearch: (ser) => set({search: ser}),
+// }));
 
 
 // 페이지 몇 번째인지

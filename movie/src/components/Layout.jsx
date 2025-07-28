@@ -1,11 +1,15 @@
-import { Outlet, Link } from "react-router-dom";
-import { useSearch } from "../store/movieStore";
-// import { useNavigate } from "react-router-dom";
+import { Outlet, Link, useSearchParams } from "react-router-dom";
+
 
 export function Layout() {
-    const search = useSearch((state) => state.search);
-    const setSearch = useSearch((state) => state.setSearch);
-    // const navigate = useNavigate()
+    const [searchParams, setSearchParams] = useSearchParams();
+    const search = searchParams.get("query") || '';
+
+    const setSearch = (value) => {
+        console.log('setSearch:', value);
+        setSearchParams(value ? { query: value } : {});
+    };
+
 
     return (
     <div className="flex flex-col w-full ">
