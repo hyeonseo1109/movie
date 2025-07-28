@@ -50,3 +50,12 @@
     font-size: 9px;
   }
 }
+
+@media (max-width: 600px) {
+  .detailCard {
+    font-size: 9px;
+
+    width: 100%;
+  }
+
+}

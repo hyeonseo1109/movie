@@ -1,11 +1,11 @@
 import { Outlet, Link } from "react-router-dom";
 import { useSearch } from "../store/movieStore";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 export function Layout() {
     const search = useSearch((state) => state.search);
     const setSearch = useSearch((state) => state.setSearch);
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     return (
     <div className="flex flex-col w-full ">
@@ -24,10 +24,7 @@ export function Layout() {
                         onChange={ (e) => setSearch(e.target.value)}
                         className="border-b border-white text-white input"/>
                     <span
-                        onClick={ () => {
-                            navigate(`/search?movie=${search}`);
-                            setSearch('');
-                        }}
+                        onClick={ () => setSearch("")}
                         className="inline-block transform rotate-[110deg] text-white font-extrabold text-[1.3em]">☌</span>
                 </div>
             </div>

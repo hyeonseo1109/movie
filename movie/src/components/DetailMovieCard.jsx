@@ -18,17 +18,17 @@ export function DetailMovieCard () {
 
     // 이거 지우면 쿵푸팬더 정보는 쿵푸팬더한테만 뜨게 할 수 있음. 
     // if (!detailMovies || String(detailMovies.id) !== id) {
-    if (!detailMovies) {
+    if (!detailMovies || String(detailMovies.id) !== id ) {
         console.log(id);
-        return <div>영화 정보가 없습니다.</div>;   
+        return <div className="bg-black shadow-[0_0_15px_#000000c1] text-white flex flex-col w-[70em] mx-auto">로딩 중...</div>;   
     }
 
 
 
 
     return (
-    <div className="flex flex-wrap gap-4 p-4 mx-5 my-5 justify-center">
-            <div key={detailMovies.id} className="bg-black shadow-[0_0_15px_#000000c1] text-white flex flex-col  detail w-[70em] detailCard">
+    <div className="flex flex-wrap gap-4 p-4 mx-5 my-5 justify-center realDetail">
+            <div key={detailMovies.id} className="bg-black shadow-[0_0_15px_#000000c1] text-white flex flex-col detailCard">
                 <div 
                     onClick={() => navigate(-1)}
                     className="font-bold text-[gray] text-[1.3em]"

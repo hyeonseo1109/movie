@@ -39,7 +39,6 @@ arr.sort( (a,b) => b.vote_average - a.vote_average)
 
 페이지 번호 만들어서 패치 주소에 변수 넣어서 연결 ㄱㄱ
 
-연령제한
 
 
 상세정보 데이터 빨리빨리 안바뀜 로딩중일거면 로딩중으로 뜨게 ㄱㄱ
@@ -48,3 +47,13 @@ arr.sort( (a,b) => b.vote_average - a.vote_average)
 
 ---페이지 패치할 떄 1, 2, 3..일 때 그 페이지에서만 검색되니까 잘 생각해봐---
 별점순/최신순/인기순 페이지마다 그거 별로 각각 될 것 같은데 자료 자체를 sort하고 해야되나
+
+
+관람등급
+&certification.lte=19&certification_country=KR&
+
+영화 api 받아올 때 검색 관련?
+
+
+
+

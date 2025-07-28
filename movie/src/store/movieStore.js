@@ -31,6 +31,24 @@ export const useMovieStore = create((set) => ({
         } catch (err) {
             console.error('에러:', err);
         }
+    },
+
+    searchedResults: [],
+    setSearchedResults: (movies) => set({ searchedResults: movies }),
+
+    fetchSearchedResults: async (query) => {
+        try {
+            const res = await fetch(`https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(query)}&language=ko-KR`, {
+                headers: {
+                    Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`,
+                },
+            });
+            const data = await res.json();
+            set({ searchedResults: data.results || [] });
+        } catch (err) {
+            console.error("검색 오류:", err);
+            set({ searchedResults: [] });
+        }
     }
 }))
 
