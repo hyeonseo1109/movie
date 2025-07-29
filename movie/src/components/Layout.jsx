@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 
 export default function Layout() {
     const [searchParams, setSearchParams] = useSearchParams();
+    //url 쿼리 파라미터를 가져오고 설정함
     const query = searchParams.get("query") || '';
     const [input, setInput] = useState(query);
     const navigate = useNavigate();
@@ -13,45 +14,61 @@ export default function Layout() {
     const location = useLocation();
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    //모달창 상태관리
     const menuRef = useRef();
+    //모달 닫았다 열었다 해도 불필요하게 리렌더 되지 않도록 Ref
     
 
-    const {isLogined, supabaseClient, setIsSignInMode } = useSupabase();
+    const {isLogined, supabaseClient, setIsSignInMode, isDark, setIsDark } = useSupabase();
 
 
+    //경로에 따라서 로그인/회원가입 모드를 전환함.
     useEffect(() => {
         if (location.pathname === "/signup") {
-        setIsSignInMode(false); // 회원가입 모드
+        //location.pathname: 현재 url의 경로(path)부분을 문자열로 반환함.
+        setIsSignInMode(false); 
+        // 회원가입 모드
         } else if (location.pathname === "/login") {
-        setIsSignInMode(true);  // 로그인 모드
+        setIsSignInMode(true);  
+        // 로그인 모드
         }
     }, [location.pathname, setIsSignInMode]);
 
+
+    //쿼리 파라미터가 바뀌면 input 상태 리렌더
     useEffect(() => {
         setInput(query);
     }, [query]);
 
+
+    //검색어 입력 변경 처리
     const handleChange = (e) => {
         const val = e.target.value;
         setInput(val);
         setSearchParams(val ? { query: val } : {});
+        //쿼리 파라미터를 입력값으로 업데이트
     };
 
+    //검색어 초기화 함수
     const clearSearch = () => {
         setInput('');
         setSearchParams({});
     };
 
+    //로그아웃 함수
     const handleLogout = async () => {
         const { error } = await supabaseClient.auth.signOut();
         if (!error) {
-            navigate("/"); // 로그아웃 후 홈으로 이동
+            navigate("/"); 
+            // 로그아웃 후 홈으로 이동
         } else {
             alert("로그아웃에 실패했습니다.");
         }
     };
 
-        useEffect(() => {
+
+    //모달창 바깥을 클릭했을 때 창 닫음.
+    useEffect(() => {
         const handleClickOutside = (event) => {
         if (menuRef.current && !menuRef.current.contains(event.target)) {
             //모달창이 존재하는지 = 띄워져있는지 확인 
@@ -72,7 +89,7 @@ export default function Layout() {
 
     return (
     <div className="flex flex-col w-full ">
-        <div className="flex flex-row justify-between w-full h-[4em] items-center px-10 shadow-[0_0_10px_black] nav">
+        <div className={`flex flex-row justify-between w-full h-[4em] items-center px-10 shadow-[0_0_10px_black] relative z-30 ${isDark ? "nav" : "light-nav"}`}>
             <nav>
                 <Link
                     to="/"
@@ -88,7 +105,7 @@ export default function Layout() {
                         className="border-b border-white text-white input"/>
                     <span
                         onClick={clearSearch}
-                        className="inline-block transform rotate-[110deg] text-white font-extrabold text-[1.3em]">☌</span>
+                        className="inline-block transform rotate-[110deg] text-white font-extrabold text-[1.3em] cursor-pointer">☌</span>
                 </div>
                 {isLogined ? (<>
                 <div ref={menuRef} className="relative">
@@ -134,7 +151,10 @@ export default function Layout() {
                     onClick={() => setIsSignInMode(false)}
                     >회원가입</Link>
                     </>)}
-                
+            <span 
+                className="text-white text-[1.5em] cursor-pointer"
+                onClick={()=> setIsDark((prev) => !prev)}
+            >{isDark ? "☾" : "☼" }</span>
                 
             </div>
         </div>
