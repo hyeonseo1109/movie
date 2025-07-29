@@ -38,7 +38,7 @@
     font-size: 15px;
   }
 }
-
+/* 
 @media (max-width: 750px) {
   .detailCard {
     font-size: 12px;
@@ -49,4 +49,33 @@
   .detailCard {
     font-size: 9px;
   }
+} */
+
+.detailCard {
+  max-width: 50em; /* 최대 너비 고정 */
+  width: 100%;     /* 화면 좁으면 100% */
+  margin: 0 auto;  /* 중앙 정렬 */
+  position: relative;
+  overflow: hidden; /* 넘치는 부분 숨김 */
 }
+.marginChange {
+  margin-top: -18em;
+}
+
+/* @media (max-width: 600px) {
+  .marginChange {
+    margin-top: 10em;
+  }
+} */
+/* 
+@media (max-width: 800px) {
+  .movie-floating-box {
+    margin-top: -10em;
+  }
+}
+
+@media (max-width: 600px) {
+  .movie-floating-box {
+    margin-top: -7em;
+  }
+} */

@@ -1,11 +1,26 @@
-import { Outlet, Link } from "react-router-dom";
-import { useSearch } from "../store/movieStore";
-import { useNavigate } from "react-router-dom";
+import { Outlet, Link, useSearchParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+
 
 export function Layout() {
-    const search = useSearch((state) => state.search);
-    const setSearch = useSearch((state) => state.setSearch);
-    const navigate = useNavigate()
+    const [searchParams, setSearchParams] = useSearchParams();
+    const query = searchParams.get("query") || '';
+    const [input, setInput] = useState(query);
+
+    useEffect(() => {
+        setInput(query);
+    }, [query]);
+
+    const handleChange = (e) => {
+        const val = e.target.value;
+        setInput(val);
+        setSearchParams(val ? { query: val } : {});
+    };
+
+    const clearSearch = () => {
+        setInput('');
+        setSearchParams({});
+    };
 
     return (
     <div className="flex flex-col w-full ">
@@ -13,21 +28,26 @@ export function Layout() {
             <nav>
                 <Link
                     to="/"
-                    className="text-[2em] font-extrabold text-white tracking-[-5px]">Movie_Topia</Link>
+                    className="text-[2em] font-extrabold text-white tracking-[-5px]"
+                    onClick={clearSearch}               
+                >Movie_Topia</Link>
             </nav>
             <div className="flex flex-row gap-7 items-center">
                 <div>
                     <input  
-                        value={search}
-                        onChange={ (e) => setSearch(e.target.value)}
+                        value={input}
+                        onChange={handleChange}
                         className="border-b border-white text-white input"/>
                     <span
-                        onClick={ () => {
-                            navigate(`/search?movie=${search}`);
-                            setSearch('');
-                        }}
+                        onClick={clearSearch}
                         className="inline-block transform rotate-[110deg] text-white font-extrabold text-[1.3em]">☌</span>
                 </div>
+                <Link to="login" 
+                    className="text-white">로그인</Link>
+                <Link to="signup" 
+                    className="text-white">회원가입</Link>
+                <Link to="mypage" 
+                    className="text-white">마이페이지</Link>
             </div>
         </div>
 
