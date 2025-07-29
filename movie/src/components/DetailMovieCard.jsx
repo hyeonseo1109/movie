@@ -47,8 +47,8 @@ export function DetailMovieCard () {
                             src={`https://image.tmdb.org/t/p/w500/${detailMovies.backdrop_path}`} />) : <div className="w-full h-auto bg-white"></div>}
                         <div 
                             className="
-                            bg-[linear-gradient(180deg,rgb(0,0,0,0)1%,rgb(0,0,0,0.2)10%,rgb(0,0,0,0.55)30%,rgb(0,0,0,0.75)50%,rgb(0,0,0,0.98)80%)]
-                            absolute top-[13.1em] left-0 w-full h-[15em] z-0
+                            bg-[linear-gradient(180deg,rgb(0,0,0,0.05)1%,rgb(0,0,0,0.2)5%,rgb(0,0,0,0.3)10%,rgb(0,0,0,0.45)15%,rgb(0,0,0,0.75)50%,rgb(0,0,0,0.98)80%)]
+                            absolute top-[13.3em] left-0 w-full h-[15em] z-0
                             "
                             alt="흰박스"
                         ></div>

@@ -139,10 +139,10 @@ export function MovieCard () {
 
         )}
         <div className="flex flex-wrap gap-6 p-4 justify-center my-5">
-            {activeMovies.length !== 0 ? pagedMovies.map( (mv) => (
+            {activeMovies.length !== 0 ? pagedMovies.map( (mv, idx) => (
                 <Link
                     to={`/detail/${mv.id}`}
-                    key={mv.id} className="border bg-black shadow-[0_0_15px_#000000c1] box">
+                    key={`${mv.id}-${idx}`} className="border bg-black shadow-[0_0_15px_#000000c1] box">
                     <div className="w-[10em] h-[15em] relative overflow-hidden flex">
                         <img src={`${imgUrl}${mv.poster_path}`} />
                         <div className="bg-[#000000c1] text-white absolute w-full h-[3em] bottom-[0.5em] shadow-[0_-0.3em_0.3em_rgba(255,255,255,0.3),_0_0.3em_0.3em_rgba(255,255,255,0.3)] flex flex-col justify-center">

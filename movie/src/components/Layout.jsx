@@ -1,11 +1,31 @@
-import { Outlet, Link, useSearchParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { Outlet, Link, useSearchParams, useNavigate } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import { useSupabase } from "../supabase/context";
+import { VscAccount } from "react-icons/vsc";
+import { useLocation } from "react-router-dom";
 
-
-export function Layout() {
+export default function Layout() {
     const [searchParams, setSearchParams] = useSearchParams();
     const query = searchParams.get("query") || '';
     const [input, setInput] = useState(query);
+    const navigate = useNavigate();
+
+    const location = useLocation();
+
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const menuRef = useRef();
+    
+
+    const {isLogined, supabaseClient, setIsSignInMode } = useSupabase();
+
+
+    useEffect(() => {
+        if (location.pathname === "/signup") {
+        setIsSignInMode(false); // 회원가입 모드
+        } else if (location.pathname === "/login") {
+        setIsSignInMode(true);  // 로그인 모드
+        }
+    }, [location.pathname, setIsSignInMode]);
 
     useEffect(() => {
         setInput(query);
@@ -22,13 +42,41 @@ export function Layout() {
         setSearchParams({});
     };
 
+    const handleLogout = async () => {
+        const { error } = await supabaseClient.auth.signOut();
+        if (!error) {
+            navigate("/"); // 로그아웃 후 홈으로 이동
+        } else {
+            alert("로그아웃에 실패했습니다.");
+        }
+    };
+
+        useEffect(() => {
+        const handleClickOutside = (event) => {
+        if (menuRef.current && !menuRef.current.contains(event.target)) {
+            //모달창이 존재하는지 = 띄워져있는지 확인 
+            // => 요소가 조건부렌더링으로 숨겨지면 React에서 자동으로 current속성값을 null로 바꿈. 
+            // && 클릭한 요소가 모달 안에 포함되지 않은 상태인지 확인
+            setIsMenuOpen(false);
+        }
+        };
+        if (isMenuOpen) {
+        document.addEventListener("mousedown", handleClickOutside);
+        } else {
+        document.removeEventListener("mousedown", handleClickOutside);
+        }
+        return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isMenuOpen]);
+
     return (
     <div className="flex flex-col w-full ">
         <div className="flex flex-row justify-between w-full h-[4em] items-center px-10 shadow-[0_0_10px_black] nav">
             <nav>
                 <Link
                     to="/"
-                    className="text-[2em] font-extrabold text-white tracking-[-5px]"
+                    className="text-[2em] font-extrabold text-white tracking-[-5px] logo"
                     onClick={clearSearch}               
                 >Movie_Topia</Link>
             </nav>
@@ -42,12 +90,52 @@ export function Layout() {
                         onClick={clearSearch}
                         className="inline-block transform rotate-[110deg] text-white font-extrabold text-[1.3em]">☌</span>
                 </div>
-                <Link to="login" 
-                    className="text-white">로그인</Link>
-                <Link to="signup" 
-                    className="text-white">회원가입</Link>
-                <Link to="mypage" 
-                    className="text-white">마이페이지</Link>
+                {isLogined ? (<>
+                <div ref={menuRef} className="relative">
+                    {/*클릭 이벤트가 있을 때 화면 전체에 버블링됨, 
+                    contains()로 클릭된 대상이 모달 내부인지 판단함.*/}
+                    <VscAccount
+                    size={35}
+                    color="white"
+                    onClick={() => setIsMenuOpen((prev) => !prev)}
+                    className="cursor-pointer"
+                    />
+
+                    {isMenuOpen && (
+                    <div
+                        className="absolute right-0 mt-2 w-32 bg-gray-800 text-white rounded shadow-lg z-10 p-2"
+                    >
+                        <Link
+                        to="mypage"
+                        className="block px-2 py-1 hover:bg-gray-700 rounded"
+                        onClick={() => setIsMenuOpen(false)} // 클릭하면 모달 닫기
+                        >
+                        마이페이지
+                        </Link>
+                        <button
+                        onClick={() => {
+                            handleLogout();
+                            setIsMenuOpen(false);
+                        }}
+                        className="block w-full text-left px-2 py-1 hover:bg-gray-700 rounded"
+                        >
+                        로그아웃
+                        </button>
+                    </div>
+                    )}
+                </div>
+            </>) : (<>
+                    <Link to="login" 
+                    className="text-white login"
+                    onClick={() => setIsSignInMode(true)}
+                    >로그인</Link>
+                    <Link to="signup" 
+                    className="text-white signup"
+                    onClick={() => setIsSignInMode(false)}
+                    >회원가입</Link>
+                    </>)}
+                
+                
             </div>
         </div>
 
