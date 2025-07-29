@@ -159,22 +159,19 @@ export function MovieCard () {
                     
             )) : ( <div className="text-center text-white text-lg">검색 결과가 없습니다.</div>)}
         </div>
-        <div className="flex justify-center gap-4 my-[2em_10em]">
+        <div className="flex justify-center gap-4 py-[2em_10em]">
             {[1,2,3,4,5,6,7,8,9,10].map((num) => (
             <button
                 key={num}
                 onClick={() => setPage(num)}
-                style={{
-                    backgroundColor: num === page ? "rgb(19, 23, 160)" : "white",
-                    color: num === page ? "white" : "black",
-                    fontWeight: num === page ? "bold" : "normal",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    borderRadius: "0.3em",
-                    height: "1.5em",
-                    width: "1.5em"
-                }}
+                className={`
+                    flex justify-center items-center rounded 
+                    h-6 w-6 text-sm
+                    ${num === page 
+                    ? "bg-blue-900 text-white font-bold" 
+                    : "bg-white text-black"} 
+                    hover:bg-gray-700 hover:text-white
+                `}
                 >
                 {num}
                 </button>
