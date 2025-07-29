@@ -5,7 +5,7 @@ import { DetailMovieCard } from './components/DetailMovieCard';
 import { Layout } from './components/Layout';
 import Login from './components/Login';
 import Mypage from './components/Mypage';
-import SignUp from './components/Signup.';
+import SignUp from './components/Signup';
 
 function App() {
 

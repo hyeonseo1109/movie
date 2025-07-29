@@ -11,8 +11,8 @@ export default function SignUp() {
   const handleSignup = async (e) => {
     e.preventDefault();
 
-    // 1. 회원가입 시도
-    const { data, error } = await supabase.auth.signUp({
+    // 1. 회원가입 시도 (이메일 인증 발송)
+    const { _, error } = await supabase.auth.signUp({
       email,
       password,
     });
@@ -22,25 +22,10 @@ export default function SignUp() {
       return;
     }
 
-    // 2. 회원가입 성공하면 profiles 테이블에 이름, 전화번호 저장
-    if (data.user) {
-      const { error: profileError } = await supabase
-        .from("profiles")
-        .insert([
-          {
-            userId: data.user.id,
-            name,
-            phoneNumber,
-          },
-        ]);
-
-      if (profileError) {
-        setMessage(`프로필 저장 중 에러: ${profileError.message}`);
-        return;
-      }
-    }
-
-    setMessage("회원가입 완료! 이메일을 확인해주세요.");
+    // 2. 프로필 저장은 하지 않고, 이메일 인증 안내만
+    setMessage(
+      "회원가입 완료! 이메일을 확인하고 인증을 완료한 후 로그인 해주세요."
+    );
   };
 
   return (
@@ -78,7 +63,7 @@ export default function SignUp() {
           onChange={(e) => setPassword(e.target.value)}
           className="p-2 text-black rounded bg-white"
           required
-          minLength={4}
+          minLength={6}
         />
         <button
           type="submit"
