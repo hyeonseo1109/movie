@@ -1,25 +1,59 @@
 import { useState } from "react";
-import { supabase } from "../supabaseClient";
 import { useNavigate } from "react-router-dom";
+import { useSupabaseAuth } from "../../supabase";
+import { useUserContext } from "../context/UserContext";
+import CommonInput from "./CommonInput";  
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  
+  // 유효성 에러 메시지 상태
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
   const navigate = useNavigate();
+
+  const { login } = useSupabaseAuth();
+  const { setUser } = useUserContext();
+
+  const validate = () => {
+    let isValid = true;
+
+    // 이메일 간단 체크
+    if (!email) {
+      setEmailError("이메일을 입력해주세요.");
+      isValid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setEmailError("올바른 이메일 형식을 입력해주세요.");
+      isValid = false;
+    } else {
+      setEmailError("");
+    }
+
+    // 비밀번호 체크 (빈 값 체크만 기본)
+    if (!password) {
+      setPasswordError("비밀번호를 입력해주세요.");
+      isValid = false;
+    } else {
+      setPasswordError("");
+    }
+
+    return isValid;
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    if (!validate()) return; // 유효성 검사 실패하면 로그인 안함
 
-    if (error) {
-      setMessage(`❌ ${error.message}`);
-    } else {
+    try {
+      const user = await login({ email, password });
+      setUser(user);
       setMessage("로그인 성공");
       navigate("/");
+    } catch (error) {
+      setMessage(`❌ ${error.message}`);
     }
   };
 
@@ -27,19 +61,25 @@ export default function Login() {
     <div className="text-white flex flex-col items-center mt-10">
       <h2 className="text-2xl mb-4">로그인</h2>
       <form onSubmit={handleLogin} className="flex flex-col gap-4 w-80">
-        <input
+        <CommonInput
+          label="이메일"
+          id="email"
           type="email"
-          placeholder="이메일"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="p-2 text-black rounded bg-white"
+          placeholder="이메일"
+          required
+          error={emailError}
         />
-        <input
+        <CommonInput
+          label="비밀번호"
+          id="password"
           type="password"
-          placeholder="비밀번호"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="p-2 text-black rounded bg-white"
+          placeholder="비밀번호"
+          required
+          error={passwordError}
         />
         <button
           type="submit"
