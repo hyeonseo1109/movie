@@ -45,6 +45,7 @@ export function MovieCard () {
     }, [debounceQuery, fetchMovies, fetchSearchedResults, setPage]);
 
     const activeMovies = debounceQuery ? searchedResults : movies;
+    
 
 
     const sortedMovies = useMemo(() => {
@@ -138,7 +139,7 @@ export function MovieCard () {
 
         )}
         <div className="flex flex-wrap gap-6 p-4 justify-center my-5">
-            {pagedMovies ? pagedMovies.map( (mv) => (
+            {activeMovies.length !== 0 ? pagedMovies.map( (mv) => (
                 <Link
                     to={`/detail/${mv.id}`}
                     key={mv.id} className="border bg-black shadow-[0_0_15px_#000000c1] box">
@@ -153,7 +154,7 @@ export function MovieCard () {
                     </div>
                 </Link>  
                     
-            )) : (<div>영화 정보가 없습니다.</div>)}
+            )) : ( <div className="text-center text-white text-lg">검색 결과가 없습니다.</div>)}
         </div>
         <div className="flex justify-center gap-4 my-[2em_10em]">
             {[1,2,3,4,5,6,7,8,9,10].map((num) => (

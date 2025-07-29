@@ -42,6 +42,12 @@ export function Layout() {
                         onClick={clearSearch}
                         className="inline-block transform rotate-[110deg] text-white font-extrabold text-[1.3em]">☌</span>
                 </div>
+                <Link to="login" 
+                    className="text-white">로그인</Link>
+                <Link to="signup" 
+                    className="text-white">회원가입</Link>
+                <Link to="mypage" 
+                    className="text-white">마이페이지</Link>
             </div>
         </div>
 

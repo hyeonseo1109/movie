@@ -13,11 +13,11 @@ export function DetailMovieCard () {
     useEffect( () => {
         fetchDetailMovies(id);
     }, [fetchDetailMovies, id]);
-    //나중에 id로 숫자 넘기는 거 바꾸기
-    //지금은 어떤 영화를 눌러도 다 쿵푸팬더가 떠야 되니까 쿵푸팬더 아이디를 넘김
 
-    // 이거 지우면 쿵푸팬더 정보는 쿵푸팬더한테만 뜨게 할 수 있음. 
-    // if (!detailMovies || String(detailMovies.id) !== id) {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [id]);
+
     if (!detailMovies || String(detailMovies.id) !== id ) {
         console.log(id);
         return <div className="bg-black shadow-[0_0_15px_#000000c1] text-white flex flex-col w-[70em] mx-auto">로딩 중...</div>;   

@@ -50,10 +50,33 @@ arr.sort( (a,b) => b.vote_average - a.vote_average)
 
 
 관람등급
-&certification.lte=19&certification_country=KR&
+~~~&certification.lte=19&certification_country=KR&~~~
 
 영화 api 받아올 때 검색 관련?
 
 
 
+찜기능
 
+스켈레톤
+
+다크모드
+
+nav바 - 로그인&회원가입&마이페이지
+
+=> Supabase를 이용한 회원가입
+
+
+검색어 입력 후 엔터 누르거나 input 포커스 아웃 시에도 작동하도록
+<input
+  value={input}
+  onChange={handleChange}
+  onKeyDown={(e) => {
+    if (e.key === 'Enter') {
+      setSearchParams(input ? { query: input } : {});
+    }
+  }}
+/>
+
+
+상세페이지 누를 떄 최상단으로 스크롤 이동
