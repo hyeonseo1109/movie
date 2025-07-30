@@ -3,7 +3,7 @@ import { useSupabase } from "../supabase/context";
 import { useNavigate } from "react-router-dom";
 
 export default function Auth() {
-  const { supabaseClient, isSignInMode, isDark } = useSupabase(); 
+  const { supabaseClient, isSignInMode, isDark, setUser } = useSupabase(); 
   //contextAPI로 생성한 supabase와 관련된 전역상태들 가져오기
   const navigate = useNavigate();
 
@@ -23,6 +23,13 @@ export default function Auth() {
     // $: 문자열의 끝
     const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{6,}$/;
     // 알파벳 대문자 또는 소문자, 숫자 => 6자 이상
+    // (?=.*[a-zA-Z]) : 알파벳이 하나 이상 포함되어야 함
+    // (?=.*\d) : 숫자가 하나 이상 포함되어야 함 = (?=.*[0-9] )
+    // [A-Za-z\d]{6,} : 알파벳 또는 숫자로 된 문자가 6자 이상이어야 함
+
+    // \D: 숫자가 아닌 것
+    // \s: 공백 문자
+    // \S: 공백이 아닌 문자
 
     if (!isSignInMode && !nameRegex.test(name)) {
       //로그인모드가 아닐 때,  name이 정규식 조건에 맞지 않을 때 
@@ -40,6 +47,7 @@ export default function Auth() {
     return null;
   };
 
+  //회원가입 함수
   const signUp = async () => {
     const validationError = validateInputs();
     if (validationError) {
@@ -49,10 +57,10 @@ export default function Auth() {
 
     const { error } = await supabaseClient.auth.signUp({
       // Supabase auth API 호출 - 회원가입
-      // options.data에 name을 넣어 사용자 메타데이터로 저장
       email,
       password,
       options: { data: { name } },
+      // options.data에 name을 넣어 사용자 메타데이터로 저장
     });
     if (error) {
       if (error.message === "User already registered") {
@@ -61,7 +69,8 @@ export default function Auth() {
         setError(error.message);
       }
     } else {
-      setMessage("회원가입 성공! 로그인을 진행해주세요.");
+      setMessage("회원가입 되었습니다. 환영해요!");
+        setError("");
     }
   };
 
@@ -69,15 +78,18 @@ export default function Auth() {
   const signIn = async () => {
     setError(null);
     setMessage(null);
-    // Supabase 로그인 API 호출 (비밀번호 방식)
-    const { error } = await supabaseClient.auth.signInWithPassword({
+    // Supabase 로그인 API 호출 (비밀번호/이메일이 일치하는지 확인함)
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
       email,
       password,
     });
+    //POST 요청으로 이메일과 패스워드만 보냄
     if (error) setError("로그인에 실패했습니다.");
     else {
       setMessage("로그인 성공!");
+      setError("");
       navigate("/");
+      setUser(data.user);
       //로그인 성공 시 메인화면으로 이동
     }
   };

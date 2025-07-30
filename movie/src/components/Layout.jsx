@@ -108,10 +108,12 @@ export default function Layout() {
                         className="inline-block transform rotate-[110deg] text-white font-extrabold text-[1.3em] cursor-pointer">☌</span>
                 </div>
                 {isLogined ? (<>
+                {/*모달창*/}
                 <div ref={menuRef} className="relative">
                     {/*클릭 이벤트가 있을 때 화면 전체에 버블링됨, 
                     contains()로 클릭된 대상이 모달 내부인지 판단함.*/}
                     <VscAccount
+                    //아이콘
                     size={35}
                     color="white"
                     onClick={() => setIsMenuOpen((prev) => !prev)}

@@ -19,21 +19,24 @@ export const SupabaseProvider = ({ children }) => {
     // 현재 로그인된 유저 정보를 저장하는 state, 초기값은 null (유저 없음)
     const [isSignInMode, setIsSignInMode] = useState(true);
     const [isDark, setIsDark] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
 
     // 첫 렌더링 시 로그인 상태 초기화
     useEffect(() => {
 
-        // 페이지 새로고침 시 세션 유지하도록 현재 세션 정보를 받아옴
+        // 페이지 새로고침 시에도 세션 유지하도록 현재 세션 정보를 받아옴
         const getSession = async () => {
             const {
                 data: { session },
             } = await supabaseClient.auth.getSession();
             // supabaseClient.auth.getSession()으로 세션 데이터를 받아옴
             if (session?.user) {
+                //로그인 되었는지를 감지하여 전역상태를 바꿈
                 setIsLogined(true);
                 setUser(session.user);
-                
             }
+
+            setIsLoading(false);
         };
         getSession();
         // session 받아오는 함수 실행
@@ -65,7 +68,7 @@ export const SupabaseProvider = ({ children }) => {
     console.log('유저정보:', user)
 
     return (
-        <SupabaseContext.Provider value={{supabaseClient, isLogined, user, isSignInMode, setIsSignInMode, isDark, setIsDark}}>
+        <SupabaseContext.Provider value={{supabaseClient, isLogined, user, setUser, isSignInMode, setIsSignInMode, isDark, setIsDark, isLoading }}>
         {/*이 컴포넌트 내부에서 useSupabse()를 호출하면
         value인 supabaseClient, isLogined, user... 를 받아옴.*/}
             {children}

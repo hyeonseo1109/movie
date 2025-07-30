@@ -20,6 +20,8 @@ export function DetailMovieCard () {
         window.scrollTo(0, 0);
     }, [id]);
 
+    
+
     if (!detailMovies || String(detailMovies.id) !== id ) {
         console.log(id);
         return <div className={`${ isDark ? "bg-black text-white " : "bg-white text-black"} shadow-[0_0_15px_#000000c1]flex flex-col  min-w-screen min-h-screen`}
