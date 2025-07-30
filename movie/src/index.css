@@ -1,5 +1,5 @@
 @import "tailwindcss";
-/* @import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css'); */
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 
 
@@ -14,8 +14,6 @@
   /* color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424; */
-  background: linear-gradient(85deg, rgb(13, 13, 13), rgb(70, 70, 70));
-  width: 100%;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

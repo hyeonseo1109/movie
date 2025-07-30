@@ -8,6 +8,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
 import { useDebounce } from "../useDebounce";
 import { useSearchParams } from "react-router-dom";
+import { useSupabase } from "../supabase/context";
 
 export function MovieCard () {
     const movies = useMovieStore( state => state.movies );
@@ -71,28 +72,29 @@ export function MovieCard () {
 
     const imgUrl = "https://image.tmdb.org/t/p/w500";
 
+    const {isDark} = useSupabase();
     
 
     return (
-    <div>
+    <div  className={`${isDark ? "background" : "light-background"}`}>
             
 
-        <div className="flex m-5 gap-5">
+        <div className="flex m-0 p-5 gap-5">
             <span
                 onClick={() => setSortMode('vote')}
-                className={`px-3 rounded-[0.4em] select-none
+                className={`px-3 rounded-[0.4em] select-none cursor-pointer hover:bg-gray-700
                 ${sortMode === 'vote' ? 'bg-[#ccc] text-black': 'bg-[#454545b9] text-white '}
                 `}
             >별점순</span>
             <span
                 onClick={() => setSortMode('recent')}
-                className={`px-3 rounded-[0.4em] select-none
+                className={`px-3 rounded-[0.4em] select-none cursor-pointer hover:bg-gray-700
                 ${sortMode === 'recent' ? 'bg-[#ccc] text-black': 'bg-[#454545b9] text-white '}
                 `}
             >최신순</span>
             <span 
                 onClick={() => setSortMode('popular')}
-                className={`px-3 rounded-[0.4em] select-none
+                className={`px-3 rounded-[0.4em] select-none cursor-pointer hover:bg-gray-700
                 ${sortMode === 'popular' ? 'bg-[#ccc] text-black': 'bg-[#454545b9] text-white '}
                 `}
             >인기순</span>
@@ -123,7 +125,7 @@ export function MovieCard () {
                     {sortedMovies.slice(0, 5).map((mv) => (
                         <SwiperSlide key={mv.id} className="w-full flex justify-center items-center">
                             <Link to={`/detail/${mv.id}`}>
-                                <div className="w-[10em] h-[15em] relative overflow-hidden flex mx-auto">
+                                <div className={`w-[10em] h-[15em] relative overflow-hidden flex mx-auto rounded-[0.8em] m-10 ${isDark ? "shadow-[0_0_30px_black]" : "shadow-[0_0_30px_rgb(152,152,152)]"}`}>
                                     <img src={`${imgUrl}${mv.poster_path}`} />
                                     <div className="bg-[#000000c1] text-white absolute w-full h-[3em] bottom-[0.5em] shadow-[0_-0.3em_0.3em_rgba(255,255,255,0.3),_0_0.3em_0.3em_rgba(255,255,255,0.3)] flex flex-col justify-center">
                                         <p className="text-[20px] leading-[1] flex justify-center text-center break-keep">{mv.title}</p>
@@ -139,11 +141,12 @@ export function MovieCard () {
 
         )}
         <div className="flex flex-wrap gap-6 p-4 justify-center my-5">
-            {activeMovies.length !== 0 ? pagedMovies.map( (mv) => (
+            {activeMovies.length !== 0 ? pagedMovies.map( (mv, idx) => (
                 <Link
                     to={`/detail/${mv.id}`}
-                    key={mv.id} className="border bg-black shadow-[0_0_15px_#000000c1] box">
-                    <div className="w-[10em] h-[15em] relative overflow-hidden flex">
+                    key={`${mv.id}-${idx}`} 
+                    className="border bg-black shadow-[0_0_15px_#000000c1] box rounded-[0.8em]">
+                    <div className="w-[10em] h-[15em] relative overflow-hidden flex rounded-[0.8em]">
                         <img src={`${imgUrl}${mv.poster_path}`} />
                         <div className="bg-[#000000c1] text-white absolute w-full h-[3em] bottom-[0.5em] shadow-[0_-0.3em_0.3em_rgba(255,255,255,0.3),_0_0.3em_0.3em_rgba(255,255,255,0.3)] flex flex-col justify-center">
                             <p className="text-[20px] leading-[1] flex justify-center text-center break-keep">{mv.title}</p>
@@ -154,24 +157,23 @@ export function MovieCard () {
                     </div>
                 </Link>  
                     
-            )) : ( <div className="text-center text-white text-lg">검색 결과가 없습니다.</div>)}
+            // )) : ( <div className="text-center text-white text-lg">검색 결과가 없습니다.</div>)}
+            )) : ( <div className={`${isDark ? "background text-white" : "bg-white text-black"} text-center  text-lg w-full flex justify-center min-h-screen `}>로딩 중...</div>)}
+
         </div>
-        <div className="flex justify-center gap-4 my-[2em_10em]">
+        <div className="flex justify-center gap-4 py-[2em_10em]">
             {[1,2,3,4,5,6,7,8,9,10].map((num) => (
             <button
                 key={num}
                 onClick={() => setPage(num)}
-                style={{
-                    backgroundColor: num === page ? "rgb(19, 23, 160)" : "white",
-                    color: num === page ? "white" : "black",
-                    fontWeight: num === page ? "bold" : "normal",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    borderRadius: "0.3em",
-                    height: "1.5em",
-                    width: "1.5em"
-                }}
+                className={`
+                    flex justify-center items-center rounded 
+                    h-6 w-6 text-sm
+                    ${num === page 
+                    ? "bg-blue-900 text-white font-bold" 
+                    : "bg-white text-black"} 
+                    hover:bg-gray-700 hover:text-white
+                `}
                 >
                 {num}
                 </button>
