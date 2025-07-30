@@ -157,7 +157,9 @@ export function MovieCard () {
                     </div>
                 </Link>  
                     
-            )) : ( <div className="text-center text-white text-lg">검색 결과가 없습니다.</div>)}
+            // )) : ( <div className="text-center text-white text-lg">검색 결과가 없습니다.</div>)}
+            )) : ( <div className={`${isDark ? "background text-white" : "bg-white text-black"} text-center  text-lg w-full flex justify-center min-h-screen `}>로딩 중...</div>)}
+
         </div>
         <div className="flex justify-center gap-4 py-[2em_10em]">
             {[1,2,3,4,5,6,7,8,9,10].map((num) => (
