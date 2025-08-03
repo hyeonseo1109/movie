@@ -19,7 +19,7 @@ export default function Layout() {
     //모달 닫았다 열었다 해도 불필요하게 리렌더 되지 않도록 Ref
     
 
-    const {isLogined, supabaseClient, setIsSignInMode, isDark, setIsDark } = useSupabase();
+    const {isLogined, supabaseClient, setIsSignInMode, isDark, user, setIsDark, setPage } = useSupabase();
 
 
     //경로에 따라서 로그인/회원가입 모드를 전환함.
@@ -87,6 +87,8 @@ export default function Layout() {
         };
     }, [isMenuOpen]);
 
+    
+
     return (
     <div className="flex flex-col w-full ">
         <div className={`flex flex-row justify-between w-full h-[4em] items-center px-10 shadow-[0_0_10px_black] relative z-30 ${isDark ? "nav" : "light-nav"}`}>
@@ -94,7 +96,10 @@ export default function Layout() {
                 <Link
                     to="/"
                     className="text-[2em] font-extrabold text-white tracking-[-5px] logo"
-                    onClick={clearSearch}               
+                    onClick={() => {
+                        clearSearch();
+                        setPage(1);
+                    }}
                 >Movie_Topia</Link>
             </nav>
             <div className="flex flex-row gap-7 items-center">
@@ -112,13 +117,16 @@ export default function Layout() {
                 <div ref={menuRef} className="relative">
                     {/*클릭 이벤트가 있을 때 화면 전체에 버블링됨, 
                     contains()로 클릭된 대상이 모달 내부인지 판단함.*/}
-                    <VscAccount
-                    //아이콘
-                    size={35}
-                    color="white"
-                    onClick={() => setIsMenuOpen((prev) => !prev)}
-                    className="cursor-pointer"
-                    />
+                    <div className="flex gap-2"
+                        onClick={() => setIsMenuOpen((prev) => !prev)}> 
+                        <span className="text-white cursor-pointer">{user.email.split("@")[0]}</span>
+                        <VscAccount
+                        //아이콘
+                        size={35}
+                        color="white"
+                        className="cursor-pointer"
+                        />
+                    </div>
 
                     {isMenuOpen && (
                     <div

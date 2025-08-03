@@ -5,6 +5,7 @@ import { DetailMovieCard } from './components/DetailMovieCard';
 import Layout from './components/Layout';
 import Mypage from './components/Mypage';
 import Auth from './components/auth';
+import Like from './components/Like';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="signup" element={<Auth />} />
         <Route path="login" element={<Auth />} />
         <Route path="mypage" element={<Mypage />} />
+        <Route path="mypage/like" element={<Like />} />
       </Route>
     </Routes>
   )
