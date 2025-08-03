@@ -18,7 +18,8 @@
 }
 
 .background {
-  background: linear-gradient(85deg, rgb(13, 13, 13), rgb(70, 70, 70));
+  /* background: linear-gradient(85deg, rgb(13, 13, 13), rgb(70, 70, 70)); */
+  background-color: black;
 }
 
 .light-background {

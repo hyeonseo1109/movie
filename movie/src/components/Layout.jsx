@@ -95,12 +95,12 @@ export default function Layout() {
             <nav>
                 <Link
                     to="/"
-                    className="text-[2em] font-extrabold text-white tracking-[-5px] logo"
+                    className="text-[2em] font-bold text-white  logo text-shadow-[0_0_40px_#2563EB]"
                     onClick={() => {
                         clearSearch();
                         setPage(1);
                     }}
-                >Movie_Topia</Link>
+                >Hour</Link>
             </nav>
             <div className="flex flex-row gap-7 items-center">
                 <div>

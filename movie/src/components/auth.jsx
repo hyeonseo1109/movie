@@ -94,6 +94,40 @@ export default function Auth() {
     }
   };
 
+  //카카오톡
+  // const signInWithKakao = async () => {
+  //   setError(null);
+  //   setMessage(null);
+
+  //   const { data, error } = await supabaseClient.auth.signInWithOAuth({
+  //     provider: "kakao",
+  //     options: {
+  //       scopes: "profile_nickname",
+  //     },
+  //     // options: {
+  //     //   redirectTo: "https://xrdlxcwqxwtzrvrmzups.supabase.co/auth/v1/callback",
+  //     // },
+  //   });
+
+  //   if (error) {
+  //     setError("카카오 로그인에 실패했습니다.");
+  //     console.error(error);
+  //   console.log("카카오 로그인 사용자 메타데이터:", data.user.user_metadata);
+
+  //   }
+  //   const nickname = data.user.user_metadata?.profile_nickname;
+
+  //   setMessage(`카카오 로그인 성공! 닉네임: ${nickname}`);
+  //   console.log("카카오 로그인 사용자 메타데이터:", data.user.user_metadata);
+
+  //   // 필요하다면 전역 상태로 저장
+  //   setUser(data.user);
+
+  //   // 로그인 후 원하는 페이지로 이동
+  //   navigate("/");
+
+  // };
+
 
   return (
     <div className={`${isDark ? "background" : "bg-white" } w-full min-h-screen`}>
@@ -147,6 +181,12 @@ export default function Auth() {
             </button>
           )}
         </div>
+        {/* <button
+          onClick={signInWithKakao}
+          className="mt-4 bg-yellow-400 text-black p-2 rounded flex justify-center items-center"
+        >
+          카카오 로그인
+        </button> */}
         {error && <p className="text-red-600">{error}</p>}
         {message && <p className="text-green-600">{message}</p>}
       </div>

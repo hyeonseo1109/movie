@@ -59,7 +59,7 @@ export function DetailMovieCard () {
                                     className={`${isDark ? "text-white" : "text-blue-600"} text-[1.5em] p-3`}
                                     style={{ cursor: "pointer" }}
                             >
-                                {likedMovies.includes(detailMovies.id) ? "♥︎" : "♡"}
+                                {likedMovies && likedMovies.includes(detailMovies.id) ? "♥︎" : "♡"}
                             </span>
                         </div>
                         <div className="flex flex-row gap-6 m-4 justify-center">
