@@ -91,11 +91,11 @@ export default function Layout() {
 
     return (
     <div className="flex flex-col w-full ">
-        <div className={`flex flex-row justify-between w-full h-[4em] items-center px-10 shadow-[0_0_10px_black] relative z-30 ${isDark ? "nav" : "light-nav"}`}>
+        <div className={`flex flex-row justify-between w-full h-[4em] items-center px-10  relative z-30 ${isDark ? "nav" : "light-nav"}`}>
             <nav>
                 <Link
                     to="/"
-                    className="text-[2em] font-bold text-white  logo text-shadow-[0_0_40px_#2563EB]"
+                    className="text-[2em] font-bold text-white  logo"
                     onClick={() => {
                         clearSearch();
                         setPage(1);

@@ -135,7 +135,7 @@ export function MovieCard () {
                     {activeMovies.slice(0, 5).map((mv) => (
                         <SwiperSlide key={mv.id} className="w-full flex justify-center items-center">
                             <Link to={`/detail/${mv.id}`}>
-                                <div className={`w-[10em] h-[15em] relative overflow-hidden flex mx-auto rounded-[0.8em] m-10 ${isDark ? "shadow-[0_0_30px_black]" : "shadow-[0_0_30px_rgb(152,152,152)]"}`}>
+                                <div className={`w-[10em] h-[15em] relative overflow-hidden flex mx-auto rounded-[0.8em] m-10 ${isDark ? "shadow-[0_0_20px_black]" : "shadow-[0_0_20px_rgb(152,152,152)]"}`}>
                                     {mv.poster_path? <img src={`${imgUrl}${mv.poster_path}`} /> : <div className="w-full h-full background"></div>}
                                     <div className="bg-[#000000c1] text-white absolute w-full h-[4em] bottom-[0.5em] shadow-[0_-0.3em_0.3em_rgba(255,255,255,0.3),_0_0.3em_0.3em_rgba(255,255,255,0.3)] flex flex-col justify-around">
                                         <p className="text-[20px] leading-[1] flex justify-center text-center break-keep">{mv.title}</p>
@@ -161,12 +161,12 @@ export function MovieCard () {
                 </Swiper>
 
         )}
-        <div className="flex flex-wrap gap-6 p-4 justify-center my-5">
+        <div className="flex flex-wrap gap-7 p-3 justify-center my-5">
             {activeMovies.length !== 0 ? activeMovies.map( (mv, idx) => (
                 <Link
                     to={`/detail/${mv.id}`}
                     key={`${mv.id}-${idx}`} 
-                    className="border bg-black shadow-[0_0_15px_#000000c1] box rounded-[0.8em]">
+                    className=" bg-black shadow-[0_0_10px_#000000c1] box rounded-[0.8em]">
                     <div className="w-[10em] h-[15em] relative overflow-hidden flex rounded-[0.8em]">
                         {mv.poster_path? <img src={`${imgUrl}${mv.poster_path}`} /> : <div className="w-full h-full background"></div>}
                         <div className="bg-[#000000c1] text-white absolute w-full h-[4em] bottom-[0.5em] shadow-[0_-0.3em_0.3em_rgba(255,255,255,0.3),_0_0.3em_0.3em_rgba(255,255,255,0.3)] flex flex-col justify-around">
@@ -207,7 +207,7 @@ export function MovieCard () {
                 >
                 &lt;
             </button>
-            <span className="text-white">{page}</span>
+            <span className={`${isDark ? "text-white" : "text-black"}`}>{page}</span>
             <button
                 onClick={()=>handleNextPage()}
                 className={`

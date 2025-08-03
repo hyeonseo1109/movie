@@ -12,7 +12,7 @@ export const useMovieStore = create((set) => ({
             recent: 'release_date.desc',
         };
     try {
-        const res = await fetch(`https://api.themoviedb.org/3/discover/movie?sort_by=${sortMap[sortMode]}&page=${page}&language=ko-KR`, {
+        const res = await fetch(`https://api.themoviedb.org/3/discover/movie?sort_by=${sortMap[sortMode]}&certification.lte=19&certification_country=KR&page=${page}&language=ko-KR`, {
             headers: {
                 Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`,
             },
