@@ -19,7 +19,7 @@ export default function Layout() {
     //모달 닫았다 열었다 해도 불필요하게 리렌더 되지 않도록 Ref
     
 
-    const {isLogined, supabaseClient, setIsSignInMode, isDark, setIsDark } = useSupabase();
+    const {isLogined, supabaseClient, setIsSignInMode, isDark, user, setIsDark, setPage } = useSupabase();
 
 
     //경로에 따라서 로그인/회원가입 모드를 전환함.
@@ -87,15 +87,20 @@ export default function Layout() {
         };
     }, [isMenuOpen]);
 
+    
+
     return (
     <div className="flex flex-col w-full ">
-        <div className={`flex flex-row justify-between w-full h-[4em] items-center px-10 shadow-[0_0_10px_black] relative z-30 ${isDark ? "nav" : "light-nav"}`}>
+        <div className={`flex flex-row justify-between w-full h-[4em] items-center px-10  relative z-30 ${isDark ? "nav" : "light-nav"}`}>
             <nav>
                 <Link
                     to="/"
-                    className="text-[2em] font-extrabold text-white tracking-[-5px] logo"
-                    onClick={clearSearch}               
-                >Movie_Topia</Link>
+                    className="text-[2em] font-bold text-white  logo"
+                    onClick={() => {
+                        clearSearch();
+                        setPage(1);
+                    }}
+                >Hour</Link>
             </nav>
             <div className="flex flex-row gap-7 items-center">
                 <div>
@@ -108,15 +113,28 @@ export default function Layout() {
                         className="inline-block transform rotate-[110deg] text-white font-extrabold text-[1.3em] cursor-pointer">☌</span>
                 </div>
                 {isLogined ? (<>
+                {/*모달창*/}
                 <div ref={menuRef} className="relative">
                     {/*클릭 이벤트가 있을 때 화면 전체에 버블링됨, 
                     contains()로 클릭된 대상이 모달 내부인지 판단함.*/}
-                    <VscAccount
-                    size={35}
-                    color="white"
-                    onClick={() => setIsMenuOpen((prev) => !prev)}
-                    className="cursor-pointer"
-                    />
+                    <div className="flex gap-3 itmes-center"
+                        onClick={() =>{
+                            setIsMenuOpen((prev) => !prev)
+                            console.log(user);
+                            }}> 
+                        {/* <span className="text-white cursor-pointer">{user.email.split("@")[0]}</span> */}
+                        <span className="text-white cursor-pointer flex relative top-[0.2em]">{user.user_metadata.name}</span>
+                        {user.user_metadata.avatar_url ? 
+                        <img src={user.user_metadata.avatar_url} 
+                            className="w-[2.1875em] h-[2.1875em] cursor-pointer rounded-full object-cover" 
+                        />
+                        : <VscAccount
+                        //아이콘
+                        size={35}
+                        color="white"
+                        className="cursor-pointer"
+                        />}
+                    </div>
 
                     {isMenuOpen && (
                     <div
@@ -152,7 +170,7 @@ export default function Layout() {
                     >회원가입</Link>
                     </>)}
             <span 
-                className="text-white text-[1.5em] cursor-pointer"
+                className="text-white text-[1.5em] cursor-pointer hover:text-blue-300"
                 onClick={()=> setIsDark((prev) => !prev)}
             >{isDark ? "☾" : "☼" }</span>
                 

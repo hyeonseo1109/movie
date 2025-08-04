@@ -3,7 +3,7 @@ import { useSupabase } from "../supabase/context";
 import { useNavigate } from "react-router-dom";
 
 export default function Auth() {
-  const { supabaseClient, isSignInMode, isDark } = useSupabase(); 
+  const { supabaseClient, isSignInMode, isDark, setUser } = useSupabase(); 
   //contextAPI로 생성한 supabase와 관련된 전역상태들 가져오기
   const navigate = useNavigate();
 
@@ -23,6 +23,13 @@ export default function Auth() {
     // $: 문자열의 끝
     const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{6,}$/;
     // 알파벳 대문자 또는 소문자, 숫자 => 6자 이상
+    // (?=.*[a-zA-Z]) : 알파벳이 하나 이상 포함되어야 함
+    // (?=.*\d) : 숫자가 하나 이상 포함되어야 함 = (?=.*[0-9] )
+    // [A-Za-z\d]{6,} : 알파벳 또는 숫자로 된 문자가 6자 이상이어야 함
+
+    // \D: 숫자가 아닌 것
+    // \s: 공백 문자
+    // \S: 공백이 아닌 문자
 
     if (!isSignInMode && !nameRegex.test(name)) {
       //로그인모드가 아닐 때,  name이 정규식 조건에 맞지 않을 때 
@@ -40,6 +47,7 @@ export default function Auth() {
     return null;
   };
 
+  //회원가입 함수
   const signUp = async () => {
     const validationError = validateInputs();
     if (validationError) {
@@ -49,10 +57,10 @@ export default function Auth() {
 
     const { error } = await supabaseClient.auth.signUp({
       // Supabase auth API 호출 - 회원가입
-      // options.data에 name을 넣어 사용자 메타데이터로 저장
       email,
       password,
       options: { data: { name } },
+      // options.data에 name을 넣어 사용자 메타데이터로 저장
     });
     if (error) {
       if (error.message === "User already registered") {
@@ -61,7 +69,8 @@ export default function Auth() {
         setError(error.message);
       }
     } else {
-      setMessage("회원가입 성공! 로그인을 진행해주세요.");
+      setMessage("회원가입 되었습니다. 환영해요!");
+        setError("");
     }
   };
 
@@ -69,17 +78,77 @@ export default function Auth() {
   const signIn = async () => {
     setError(null);
     setMessage(null);
-    // Supabase 로그인 API 호출 (비밀번호 방식)
-    const { error } = await supabaseClient.auth.signInWithPassword({
+    // Supabase 로그인 API 호출 (비밀번호/이메일이 일치하는지 확인함)
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
       email,
       password,
     });
+    //POST 요청으로 이메일과 패스워드만 보냄
     if (error) setError("로그인에 실패했습니다.");
     else {
       setMessage("로그인 성공!");
+      setError("");
       navigate("/");
+      setUser(data.user);
       //로그인 성공 시 메인화면으로 이동
     }
+  };
+
+  //카카오톡 로그인
+  const signInWithKakao = async () => {
+    setError(null);
+    setMessage(null);
+
+    const { data, error } = await supabaseClient.auth.signInWithOAuth({
+      provider: "kakao",
+      options: {
+        scopes: "profile_nickname",
+      },
+      // options: {
+      //   redirectTo: "https://xrdlxcwqxwtzrvrmzups.supabase.co/auth/v1/callback",
+      // },
+    });
+
+    if (error) {
+      setError("카카오 로그인에 실패했습니다.");
+      console.error(error);
+    console.log("카카오 로그인 사용자 메타데이터:", data.user.user_metadata);
+
+    }
+    const nickname = data.user.user_metadata?.profile_nickname;
+
+    setMessage(`카카오 로그인 성공! 닉네임: ${nickname}`);
+    console.log("카카오 로그인 사용자 메타데이터:", data.user.user_metadata);
+
+
+    setUser(data.user);
+    navigate("/");
+
+  };
+
+  const signInWithGoogle = async () => {
+    setError(null);
+    setMessage(null);
+
+    const { data, error } = await supabaseClient.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        scopes: "profile email",
+      },
+    });
+    if (error) {
+      setError("구글 로그인에 실패했습니다.");
+      console.error(error);
+      return;
+    }
+    const nickname = data.user.user_metadata?.name;
+
+    setMessage(`구글 로그인 성공! 닉네임: ${nickname}`);
+    console.log("구글 로그인 사용자 메타데이터:", data.user.user_metadata);
+
+    setUser(data.user);
+    navigate("/");
+
   };
 
 
@@ -122,14 +191,14 @@ export default function Auth() {
           {!isSignInMode ? (
             <button
               onClick={signUp}
-              className="flex-1 bg-blue-600 text-white p-2 rounded"
+              className="flex-1 bg-[#5880a2] text-white p-2 rounded"
             >
               회원가입
             </button>
           ) : (
             <button
               onClick={signIn}
-              className="flex-1 bg-blue-600 text-white p-2 rounded"
+              className="flex-1 bg-[#5880a2] text-white p-2 rounded"
             >
               로그인
             </button>
@@ -137,6 +206,19 @@ export default function Auth() {
         </div>
         {error && <p className="text-red-600">{error}</p>}
         {message && <p className="text-green-600">{message}</p>}
+        <br/>
+        <button
+          onClick={signInWithKakao}
+          className="mt-4 bg-yellow-400 text-[#412b24] p-2 rounded flex justify-center items-center"
+        >
+          카카오 로그인
+        </button>
+        <button
+          onClick={signInWithGoogle}
+          className="mt-4 bg-blue-600 text-white p-2 rounded flex justify-center items-center"
+        >
+          구글 로그인
+        </button>
       </div>
     </div>
   );

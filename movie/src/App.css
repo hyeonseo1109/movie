@@ -18,7 +18,9 @@
 }
 
 .background {
-  background: linear-gradient(85deg, rgb(13, 13, 13), rgb(70, 70, 70));
+  /* background: linear-gradient(85deg, rgb(13, 13, 13), rgb(70, 70, 70)); */
+  /* background-color: black; */
+  background-color: rgb(34, 34, 34);
 }
 
 .light-background {
@@ -38,13 +40,30 @@
   /* background: linear-gradient(45deg, rgb(57, 57, 57), rgb(10, 17, 41)); */
   /* background: linear-gradient(45deg, rgb(17, 21, 148), rgb(10, 17, 41)); */
   /* background: linear-gradient(45deg, rgb(9, 12, 96), rgb(38, 14, 98)); */
-  background-color: #1f1f1f;
+  /* background-color: black; */
+  background-color: rgb(34, 34, 34);
+  /* background: linear-gradient(85deg, rgb(13, 13, 13), rgb(70, 70, 70)); */
   min-width: 100%;
 }
 
 .light-nav {
   background-color: #024aff;
   min-width: 100%;
+}
+
+.logo {
+  text-shadow: 0 0 10px #6cb8ff,
+      0 0 20px #6cb8ff,
+      0 0 30px #6cb8ff;
+  
+}
+
+.logo:hover {
+  text-shadow: 0 0 10px #6cb8ff,
+      0 0 20px #6cb8ff,
+      0 0 30px #6cb8ff,
+      0 0 40px #6cb8ff,
+      0 0 50px #6cb8ff;
 }
 
 
@@ -108,7 +127,15 @@
   .logo{
     font-size: 1.5em;
   }
+}
+
+@media (max-width: 1500px) {
   .input {
     width: 8em;
+  }
+}
+@media (max-width: 1000px) {
+  .input {
+    width: 6em;
   }
 }

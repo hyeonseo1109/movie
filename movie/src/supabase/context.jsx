@@ -3,6 +3,7 @@ import { createClient } from "@supabase/supabase-js";
 import { supabaseEnv } from "../env";
 import { useEffect, useState } from "react";
 
+
 const supabaseClient = createClient(supabaseEnv.projectURL, supabaseEnv.apiKey);
 //supabase의 함수인 createClient를 통해 
 //supabse와 연결되는 새 객체(supabaseClient라는 이름)를 만들겠다. 
@@ -19,21 +20,69 @@ export const SupabaseProvider = ({ children }) => {
     // 현재 로그인된 유저 정보를 저장하는 state, 초기값은 null (유저 없음)
     const [isSignInMode, setIsSignInMode] = useState(true);
     const [isDark, setIsDark] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
+    const [likedMovieIds, setLikedMovieIds] = useState([]);
+
+    const fetchLikedMovies = async (userId) => {
+        const { data, error } = await supabaseClient
+            .from("like")
+            .select("movie_id")
+            .eq("user_id", userId);
+        console.log(likedMovieIds);
+        if (error) {
+            console.error("좋아요 목록 불러오기 실패:", error);
+            setLikedMovieIds([]);
+        } else {
+            setLikedMovieIds(data.map((item) => item.movie_id));
+        }
+    };
+
+    // 영화 좋아요 추가
+    const addLikedMovie = async (userId, movieId) => {
+        const { error } = await supabaseClient.from("like").insert([
+            { user_id: userId, movie_id: movieId },
+        ]);
+
+        if (error) {
+            console.error("좋아요 추가 실패:", error);
+        } else {
+            setLikedMovieIds((prev) => [...prev, movieId]);
+        }
+    };
+
+    // 영화 좋아요 취소 (옵션)
+    const removeLikedMovie = async (userId, movieId) => {
+        const { error } = await supabaseClient
+            .from("like")
+            .delete()
+            .eq("user_id", userId)
+            .eq("movie_id", movieId);
+
+        if (error) {
+            console.error("좋아요 취소 실패:", error);
+        } else {
+            setLikedMovieIds((prev) => prev.filter((id) => id !== movieId));
+        }
+    };
+
 
     // 첫 렌더링 시 로그인 상태 초기화
     useEffect(() => {
 
-        // 페이지 새로고침 시 세션 유지하도록 현재 세션 정보를 받아옴
+        // 페이지 새로고침 시에도 세션 유지하도록 현재 세션 정보를 받아옴
         const getSession = async () => {
             const {
                 data: { session },
             } = await supabaseClient.auth.getSession();
             // supabaseClient.auth.getSession()으로 세션 데이터를 받아옴
             if (session?.user) {
+                //로그인 되었는지를 감지하여 전역상태를 바꿈
                 setIsLogined(true);
                 setUser(session.user);
-                
+                fetchLikedMovies(session.user.id);
             }
+
+            setIsLoading(false);
         };
         getSession();
         // session 받아오는 함수 실행
@@ -61,11 +110,11 @@ export const SupabaseProvider = ({ children }) => {
     // 로그인 상태 변화는 onAuthStateChange에서 관리하므로 별도의 의존성배열 넣을 필요 없음.
 
 
-    console.log(`로그인상태:`, isLogined);
-    console.log('유저정보:', user)
+    // console.log(`로그인상태:`, isLogined);
+    // console.log('유저정보:', user)
 
     return (
-        <SupabaseContext.Provider value={{supabaseClient, isLogined, user, isSignInMode, setIsSignInMode, isDark, setIsDark}}>
+        <SupabaseContext.Provider value={{supabaseClient, isLogined, user, setUser, isSignInMode, setIsSignInMode, isDark, setIsDark, isLoading, setIsLoading, fetchLikedMovies, addLikedMovie, removeLikedMovie, likedMovieIds, setLikedMovieIds }}>
         {/*이 컴포넌트 내부에서 useSupabse()를 호출하면
         value인 supabaseClient, isLogined, user... 를 받아옴.*/}
             {children}
