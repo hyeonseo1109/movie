@@ -130,6 +130,18 @@
 }
 
 @media (max-width: 450px) {
+  .little {
+    width: 7.5em;
+  }
+}
+
+@media (max-width: 650px) {
+  .little {
+    width: 8em;
+  }
+}
+
+@media (max-width: 450px) {
   html {
     font-size: 14px;
   }
