@@ -119,7 +119,6 @@ export function MovieCard () {
         <div className={`w-full max-w-[${swiperKey}] mx-auto px-4`}>
         { !debounceQuery && page === 1 && (
                 <Swiper
-                    key={swiperKey}
                     modules={[Navigation, Scrollbar, Autoplay]}
                     navigation
                     scrollbar={{ draggable: true }}
