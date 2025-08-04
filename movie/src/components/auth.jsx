@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSupabase } from "../supabase/context";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 
 export default function Auth() {
   const { supabaseClient, isSignInMode, isDark, setUser } = useSupabase(); 
@@ -103,10 +103,8 @@ export default function Auth() {
       provider: "kakao",
       options: {
         scopes: "profile_nickname",
+        redirectTo: "https://movies-12-zeta.vercel.app/",
       },
-      // options: {
-      //   redirectTo: "https://xrdlxcwqxwtzrvrmzups.supabase.co/auth/v1/callback",
-      // },
     });
 
     if (error) {
@@ -134,6 +132,7 @@ export default function Auth() {
       provider: "google",
       options: {
         scopes: "profile email",
+        redirectTo: "https://movies-12-zeta.vercel.app/",
       },
     });
     if (error) {
