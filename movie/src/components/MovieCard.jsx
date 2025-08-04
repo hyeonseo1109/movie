@@ -134,8 +134,8 @@ export function MovieCard () {
                         0: { slidesPerView: 1, spaceBetween: 20 },
                         400: { slidesPerView: 2, spaceBetween: 60 },
                         700: { slidesPerView: 3, spaceBetween: 100 },
-                        900: { slidesPerView: 4, spaceBetween: 140 },
-                        1200: { slidesPerView: 5, spaceBetween: 180 },
+                        900: { slidesPerView: 4, spaceBetween: 200 },
+                        1200: { slidesPerView: 5, spaceBetween: 300 },
                     }}
                     style={{ display: 'flex', justifyContent: 'center' }} 
                 >
