@@ -88,7 +88,7 @@ export function MovieCard () {
     return (
     <div  className={`${isDark ? "background" : "light-background"}`}>
             
-
+        { !debounceQuery &&
         <div className="flex m-0 p-5 gap-5">
             <span
                 onClick={() => setSortMode('vote')}
@@ -109,7 +109,7 @@ export function MovieCard () {
                 `}
             >인기순</span>
         </div>
-        
+        }
 
         { !debounceQuery && page === 1 && (
                 <Swiper
@@ -161,7 +161,7 @@ export function MovieCard () {
                 </Swiper>
 
         )}
-        <div className="flex flex-wrap gap-7 p-3 justify-center my-5">
+        <div className={`flex flex-wrap gap-7 p-3 justify-center ${!debounceQuery && "my-5"}`}>
             {activeMovies.length !== 0 ? activeMovies.map( (mv, idx) => (
                 <Link
                     to={`/detail/${mv.id}`}
