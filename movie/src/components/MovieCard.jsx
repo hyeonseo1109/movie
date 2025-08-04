@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useMovieStore, useMode, usePage } from "../store/movieStore"
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -29,8 +29,14 @@ export function MovieCard () {
     // 검색입력값이 있으면 저 fetchSearchedResults를 통해서 검색결과를 받아오고
     // 검색입력값이 없으면 그냥 fetchMovies에서 popular 영화 120개 보여주는 거.
     
-    // const moviePage = 20;
+    const [ swiperKey, setSwiperKey ] = useState(0);
 
+    useEffect(() => {
+    // 클라이언트에서만 실행
+        if (typeof window !== "undefined") {
+            setSwiperKey(window.innerWidth); // 창 너비를 기준으로 key 변경
+        }
+    }, []);
     
     const [searchParams] = useSearchParams();
     const query = searchParams.get("query") || '';
@@ -110,9 +116,10 @@ export function MovieCard () {
             >인기순</span>
         </div>
         }
-
+        <div className="w-full max-w-[1400px] mx-auto px-4">
         { !debounceQuery && page === 1 && (
                 <Swiper
+                    key={swiperKey}
                     modules={[Navigation, Scrollbar, Autoplay]}
                     navigation
                     scrollbar={{ draggable: true }}
@@ -125,10 +132,10 @@ export function MovieCard () {
                     // loop={true} 
                     breakpoints={{
                         0: { slidesPerView: 1, spaceBetween: 20 },
-                        700: { slidesPerView: 2, spaceBetween: 30 },
-                        900: { slidesPerView: 3, spaceBetween: 40 },
-                        1200: { slidesPerView: 4, spaceBetween: 100 },
-                        1500: { slidesPerView: 5, spaceBetween: 400 },
+                        700: { slidesPerView: 2, spaceBetween: 50 },
+                        900: { slidesPerView: 3, spaceBetween: 80 },
+                        1200: { slidesPerView: 4, spaceBetween: 120 },
+                        1500: { slidesPerView: 5, spaceBetween: 200 },
                     }}
                     style={{ display: 'flex', justifyContent: 'center' }} 
                 >
@@ -161,6 +168,7 @@ export function MovieCard () {
                 </Swiper>
 
         )}
+        </div>
         <div className={`flex flex-wrap gap-7 p-3 justify-center ${!debounceQuery && "my-5"}`}>
             {activeMovies.length !== 0 ? activeMovies.map( (mv, idx) => (
                 <Link

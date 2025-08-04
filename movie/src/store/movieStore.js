@@ -5,7 +5,7 @@ import { create } from "zustand";
 //영화 정보
 export const useMovieStore = create((set) => ({
     movies: [],
-    fetchMovies: async (page = 1, sortMode = 'popularity') => {
+    fetchMovies: async (page = 1, sortMode = 'popular') => {
         const sortMap = {
             popular: 'popularity.desc',
             vote: 'vote_average.desc',
