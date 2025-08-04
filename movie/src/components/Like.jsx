@@ -6,12 +6,8 @@ import { useLikedMovieStore } from "../store/movieStore";
 
 export default function Like() {
     const { isDark, likedMovieIds, user, removeLikedMovie, addLikedMovie } = useSupabase();
-    console.log("Like.jsx likedMovieIds:", likedMovieIds);
     const { likedMovies, setLikedMovies, fetchLikedMovies } = useLikedMovieStore();
 
-    useEffect(() => {
-        console.log("Like.jsx useEffect likedMovieIds changed:", likedMovieIds);
-    }, [likedMovieIds]);
 
     const imgUrl = "https://image.tmdb.org/t/p/w500";
 
