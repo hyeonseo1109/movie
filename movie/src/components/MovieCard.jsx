@@ -130,13 +130,13 @@ export function MovieCard () {
                         disableOnInteraction: false,
                     }}
                     // loop={true} 
-                    breakpoints={{
-                        0: { slidesPerView: 1, spaceBetween: 20 },
-                        400: { slidesPerView: 2, spaceBetween: 60 },
-                        700: { slidesPerView: 3, spaceBetween: 100 },
-                        900: { slidesPerView: 4, spaceBetween: 200 },
-                        1200: { slidesPerView: 5, spaceBetween: 400 },
-                    }}
+                    // breakpoints={{
+                    //     0: { slidesPerView: 1, spaceBetween: 20 },
+                    //     400: { slidesPerView: 2, spaceBetween: 60 },
+                    //     700: { slidesPerView: 3, spaceBetween: 100 },
+                    //     900: { slidesPerView: 4, spaceBetween: 200 },
+                    //     1200: { slidesPerView: 5, spaceBetween: 400 },
+                    // }}
                     style={{ display: 'flex', justifyContent: 'center' }} 
                 >
                     {activeMovies.slice(0, 5).map((mv) => (
