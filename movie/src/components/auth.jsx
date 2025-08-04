@@ -94,7 +94,7 @@ export default function Auth() {
     }
   };
 
-  //카카오톡
+  //카카오톡 로그인
   const signInWithKakao = async () => {
     setError(null);
     setMessage(null);
@@ -120,11 +120,9 @@ export default function Auth() {
     setMessage(`카카오 로그인 성공! 닉네임: ${nickname}`);
     console.log("카카오 로그인 사용자 메타데이터:", data.user.user_metadata);
 
-    // 필요하다면 전역 상태로 저장
-    setUser(data.user);
 
-    // 로그인 후 원하는 페이지로 이동
-    // navigate("/");
+    setUser(data.user);
+    navigate("/");
 
   };
 
@@ -148,11 +146,8 @@ export default function Auth() {
     setMessage(`구글 로그인 성공! 닉네임: ${nickname}`);
     console.log("구글 로그인 사용자 메타데이터:", data.user.user_metadata);
 
-    // 필요하다면 전역 상태로 저장
     setUser(data.user);
-
-    // 로그인 후 원하는 페이지로 이동
-    // navigate("/");
+    navigate("/");
 
   };
 

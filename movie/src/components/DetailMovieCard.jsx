@@ -1,7 +1,7 @@
 
 import { useEffect } from "react";
 import { useDetailMovieStore } from "../store/movieStore"
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useSupabase } from "../supabase/context";
 
@@ -10,7 +10,7 @@ export function DetailMovieCard () {
     const detailMovies = useDetailMovieStore( state => state.detailMovies );
     const fetchDetailMovies = useDetailMovieStore( state => state.fetchDetailMovies);
     const navigate = useNavigate();
-    const {isDark, user, likedMovies, removeLikedMovie, addLikedMovie} = useSupabase();
+    const {isDark, user, likedMovieIds, removeLikedMovie, addLikedMovie} = useSupabase();
 
     useEffect( () => {
         fetchDetailMovies(id);
@@ -31,14 +31,14 @@ export function DetailMovieCard () {
     const toggleLike = (movieId) => {
         if (!user) return alert("로그인 후 이용해주세요");
 
-        if (likedMovies.includes(movieId)) {
+        if (likedMovieIds.includes(movieId)) {
             removeLikedMovie(user.id, movieId);
         } else {
             addLikedMovie(user.id, movieId);
         }
     };
 
-
+    console.log(detailMovies.genres);
 
     return (
         <div className={`${isDark ? "background" : "bg-white" }  min-h-screen`}>
@@ -59,14 +59,15 @@ export function DetailMovieCard () {
                                     className={`${isDark ? "text-white" : "text-blue-600"} text-[1.5em] p-3`}
                                     style={{ cursor: "pointer" }}
                             >
-                                {likedMovies && likedMovies.includes(detailMovies.id) ? "♥︎" : "♡"}
+                                {likedMovieIds && likedMovieIds.includes(detailMovies.id) ? "♥︎" : "♡"}
                             </span>
                         </div>
                         <div className="flex flex-row gap-6 m-4 justify-center">
-                            {detailMovies.genres.map((gr) => <div 
+                            {detailMovies.genres.map((gr) => <Link 
+                                to={`${gr.id}`}
                                 key={gr.id}
                                 className={`${isDark ? "text-[#fff]" : "text-black"} text-[0.95em] p-0.5 border-b border-[#bfbfbf]`}
-                                    >#{gr?.name}</div>)}
+                                    >#{gr?.name}</Link>)}
                         </div>
                         <div className="w-full">
                             {/* <div className="relative w-[50em] mx-auto"> */}

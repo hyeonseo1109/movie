@@ -6,6 +6,7 @@ import Layout from './components/Layout';
 import Mypage from './components/Mypage';
 import Auth from './components/auth';
 import Like from './components/Like';
+import { Genre } from './components/Genre';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route index element={<MovieCard />} />
           {/*index: 부모경로(/)와 같은 경로인 자식라우트를 표현*/}
         <Route path="detail/:id" element={<DetailMovieCard />} />
+        <Route path="detail/:id/:genreId" element={<Genre />} />
         <Route path="signup" element={<Auth />} />
         <Route path="login" element={<Auth />} />
         <Route path="mypage" element={<Mypage />} />

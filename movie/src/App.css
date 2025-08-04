@@ -58,6 +58,14 @@
   
 }
 
+.logo:hover {
+  text-shadow: 0 0 10px #6cb8ff,
+      0 0 20px #6cb8ff,
+      0 0 30px #6cb8ff,
+      0 0 40px #6cb8ff,
+      0 0 50px #6cb8ff;
+}
+
 
 
 

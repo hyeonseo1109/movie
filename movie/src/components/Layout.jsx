@@ -117,16 +117,16 @@ export default function Layout() {
                 <div ref={menuRef} className="relative">
                     {/*클릭 이벤트가 있을 때 화면 전체에 버블링됨, 
                     contains()로 클릭된 대상이 모달 내부인지 판단함.*/}
-                    <div className="flex gap-3"
+                    <div className="flex gap-3 itmes-center"
                         onClick={() =>{
                             setIsMenuOpen((prev) => !prev)
                             console.log(user);
                             }}> 
                         {/* <span className="text-white cursor-pointer">{user.email.split("@")[0]}</span> */}
-                        <span className="text-white cursor-pointer flex itmes-center">{user.user_metadata.name}님</span>
+                        <span className="text-white cursor-pointer flex relative top-[0.2em]">{user.user_metadata.name}</span>
                         {user.user_metadata.avatar_url ? 
                         <img src={user.user_metadata.avatar_url} 
-                            className="w-[2.1875em] h-[2.1875em] cursor-pointer rounded-full" 
+                            className="w-[2.1875em] h-[2.1875em] cursor-pointer rounded-full object-cover" 
                         />
                         : <VscAccount
                         //아이콘
@@ -170,7 +170,7 @@ export default function Layout() {
                     >회원가입</Link>
                     </>)}
             <span 
-                className="text-white text-[1.5em] cursor-pointer"
+                className="text-white text-[1.5em] cursor-pointer hover:text-blue-300"
                 onClick={()=> setIsDark((prev) => !prev)}
             >{isDark ? "☾" : "☼" }</span>
                 

@@ -32,9 +32,9 @@ export default function Mypage() {
     console.log("가입날짜:", date);
 
     return (
-        <div className={`${isDark ? "text-white background" : "text-black bg-white"} p-4 w-full min-h-screen flex justify-center items-center`}>
+        <div className={`${isDark ? "text-white background" : "text-black bg-white"} px-2 py-20 w-full min-h-screen flex justify-center items-start`}>
             
-            <div className={`${isDark ? "bg-[#00000050]" : "bg-[#dddddd50]"} shadow-[0_0_20px_#00000050] flex items-center justify-around flex-col w-[30em] h-[20em] rounded-2xl relative`}>
+            <div className={`${isDark ? "bg-[#00000050]" : "bg-[#dddddd50]"} shadow-[0_0_20px_#00000050] flex items-center justify-around flex-col w-[35em] h-[25em] rounded-2xl relative`}>
                 <div 
                     onClick={() => navigate(-1)}
                     className={`${isDark ? "text-white" : "text-black"} font-bold text-[1.3em] p-3 absolute top-0 left-0`}
@@ -42,7 +42,8 @@ export default function Mypage() {
                 <div className="flex flex-col items-center h-[70%] gap-5">
                     { user.user_metadata.avatar_url ? 
                     <img src={user.user_metadata.avatar_url}
-                        className="w-[5em] h-[5em] rounded-full" />
+                        className="w-[5em] h-[5em] rounded-full object-cover" />
+                        // object-cover : 이미지 비율 유지하면서 넘치는 부분은 잘리게
                     : <VscAccount
                         size={80}
                         color="white"

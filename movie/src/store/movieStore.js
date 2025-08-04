@@ -101,3 +101,36 @@ export const usePage = create((set) => ({
 }));
 
 
+//장르 
+export const useRecommendedMovie = create((set) => ({
+    recommendedMovie: [],
+    fetchRecommendedMovie: async (genreId) => {
+
+    try {
+        const res = await fetch(`https://api.themoviedb.org/3/discover/movie?with_genres=${genreId}&language=ko-KR&page=1&sort_by=popularity.desc`, {
+            headers: {
+                Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`,
+            },
+        });
+        const data = await res.json();
+        const maxIndex = data.results.length;
+
+        const first = Math.trunc(Math.random()* maxIndex);
+
+        let second = Math.trunc(Math.random() * maxIndex);
+        //첫 번째랑 겹치면 다시 뽑기
+        while (second === first) {
+            second = Math.trunc(Math.random() * maxIndex);
+        }
+
+        let third = Math.trunc(Math.random() * maxIndex);
+        //첫 번째랑 겹치면 다시 뽑기
+        while (third === first || third===second) {
+            third = Math.trunc(Math.random() * maxIndex);
+        }
+        const random = [data.results[first], data.results[second], data.results[third]];
+        set({ recommendedMovie: random });
+    } catch (err) {
+        console.error('비슷한 장르 영화 불러오기 실패:', err);
+    }}
+}));
