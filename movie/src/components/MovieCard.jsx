@@ -29,14 +29,6 @@ export function MovieCard () {
     // 검색입력값이 있으면 저 fetchSearchedResults를 통해서 검색결과를 받아오고
     // 검색입력값이 없으면 그냥 fetchMovies에서 popular 영화 120개 보여주는 거.
     
-    const [ swiperKey, setSwiperKey ] = useState(0);
-
-    useEffect(() => {
-    // 클라이언트에서만 실행
-        if (typeof window !== "undefined") {
-            setSwiperKey(window.innerWidth); // 창 너비를 기준으로 key 변경
-        }
-    }, []);
     
     const [searchParams] = useSearchParams();
     const query = searchParams.get("query") || '';
@@ -116,7 +108,7 @@ export function MovieCard () {
             >인기순</span>
         </div>
         }
-        <div className={`w-full max-w-[${swiperKey}] mx-auto px-4`}>
+        <div className={`w-full max-w-screen mx-auto px-4`}>
         { !debounceQuery && page === 1 && (
                 <Swiper
                     modules={[Navigation, Scrollbar, Autoplay]}
@@ -127,8 +119,11 @@ export function MovieCard () {
                     autoplay={{
                         delay: 2000,
                         disableOnInteraction: false,
+                        pauseOnMouseEnter: false,
                     }}
                     // loop={true} 
+                    observer={true}
+                    observeParents={true}
                     breakpoints={{
                         0: { slidesPerView: 1, spaceBetween: 20 },
                         400: { slidesPerView: 2, spaceBetween: 60 },
