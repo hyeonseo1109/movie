@@ -133,9 +133,9 @@ export function MovieCard () {
                     breakpoints={{
                         0: { slidesPerView: 1, spaceBetween: 20 },
                         700: { slidesPerView: 2, spaceBetween: 30 },
-                        900: { slidesPerView: 3, spaceBetween: 50 },
-                        1200: { slidesPerView: 4, spaceBetween: 70 },
-                        1500: { slidesPerView: 5, spaceBetween: 90 },
+                        900: { slidesPerView: 3, spaceBetween: 60 },
+                        1200: { slidesPerView: 4, spaceBetween: 100 },
+                        1500: { slidesPerView: 5, spaceBetween: 130 },
                     }}
                     style={{ display: 'flex', justifyContent: 'center' }} 
                 >
