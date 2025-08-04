@@ -116,7 +116,7 @@ export function MovieCard () {
             >인기순</span>
         </div>
         }
-        <div className="w-full max-w-[1400px] mx-auto px-4">
+        <div className={`w-full max-w-[${swiperKey}] mx-auto px-4`}>
         { !debounceQuery && page === 1 && (
                 <Swiper
                     key={swiperKey}
@@ -135,7 +135,7 @@ export function MovieCard () {
                         400: { slidesPerView: 2, spaceBetween: 60 },
                         700: { slidesPerView: 3, spaceBetween: 100 },
                         900: { slidesPerView: 4, spaceBetween: 200 },
-                        1200: { slidesPerView: 5, spaceBetween: 300 },
+                        1200: { slidesPerView: 5, spaceBetween: 400 },
                     }}
                     style={{ display: 'flex', justifyContent: 'center' }} 
                 >
