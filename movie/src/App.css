@@ -129,6 +129,12 @@
   }
 }
 
+@media (max-width: 450px) {
+  html {
+    font-size: 14px;
+  }
+}
+
 @media (max-width: 1500px) {
   .input {
     width: 8em;
