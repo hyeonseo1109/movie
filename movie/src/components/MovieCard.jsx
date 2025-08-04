@@ -132,10 +132,10 @@ export function MovieCard () {
                     // loop={true} 
                     breakpoints={{
                         0: { slidesPerView: 1, spaceBetween: 20 },
-                        700: { slidesPerView: 2, spaceBetween: 30 },
-                        900: { slidesPerView: 3, spaceBetween: 60 },
-                        1200: { slidesPerView: 4, spaceBetween: 100 },
-                        1500: { slidesPerView: 5, spaceBetween: 130 },
+                        400: { slidesPerView: 2, spaceBetween: 20 },
+                        700: { slidesPerView: 3, spaceBetween: 30 },
+                        900: { slidesPerView: 4, spaceBetween: 60 },
+                        1200: { slidesPerView: 5, spaceBetween: 100 },
                     }}
                     style={{ display: 'flex', justifyContent: 'center' }} 
                 >
