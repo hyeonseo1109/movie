@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useSupabase } from "../supabase/context";
+import { VscAccount } from "react-icons/vsc";
 
 export default function Mypage() {
     const {isDark, user, isLoading } = useSupabase();
@@ -22,7 +23,7 @@ export default function Mypage() {
     }
 
 
-    const name = user.user_metadata?.name;
+    const name = user.user_metadata.name;
     const email = user.email;
     const date = user.created_at?.slice(0, 10);
 
@@ -38,13 +39,23 @@ export default function Mypage() {
                     onClick={() => navigate(-1)}
                     className={`${isDark ? "text-white" : "text-black"} font-bold text-[1.3em] p-3 absolute top-0 left-0`}
                 >🅧</div>
-                <p>회원 정보</p>
                 <div className="flex flex-col items-center h-[70%] gap-5">
+                    { user.user_metadata.avatar_url ? 
+                    <img src={user.user_metadata.avatar_url}
+                        className="w-[5em] h-[5em] rounded-full" />
+                    : <VscAccount
+                        size={80}
+                        color="white"
+                        className="cursor-pointer"
+                        />}
                     <p className="text-[2em]">{name}님, 안녕하세요!</p>
-                    <p>이메일: {email}</p>
-                    <p>가입일: {date}</p>
+                    <div className="flex flex-col items-center">
+                        <p>이메일: {email}</p>
+                        <p>가입일: {date}</p>
+                    </div>
                 </div>
-                <Link to="like">관심 있는 영화</Link>
+                <Link to="like"
+                    className="hover:text-blue-600"><u>관심 있는 영화</u></Link>
             </div>
         </div>
     );
