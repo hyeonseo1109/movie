@@ -95,7 +95,7 @@ export function DetailMovieCard () {
                                         {/* <span className="text-[1em] text-white">상영시간: {detailMovies.runtime}분</span> */}
                                         {detailMovies.runtime!==0 ? <span className="text-[1em] text-white">상영시간: {detailMovies.runtime}분</span> : null }
                                         {detailMovies.vote_average!==0 ? <span className="text-[1em] text-white">★{detailMovies.vote_average}</span> : null }
-                                        <span className="text-[2.5em] font-bold">{detailMovies.title}</span>
+                                        <span className="font-bold title">{detailMovies.title}</span>
                                     </div>
                                 </div>
 
