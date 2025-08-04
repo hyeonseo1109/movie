@@ -117,15 +117,23 @@ export default function Layout() {
                 <div ref={menuRef} className="relative">
                     {/*클릭 이벤트가 있을 때 화면 전체에 버블링됨, 
                     contains()로 클릭된 대상이 모달 내부인지 판단함.*/}
-                    <div className="flex gap-2"
-                        onClick={() => setIsMenuOpen((prev) => !prev)}> 
-                        <span className="text-white cursor-pointer">{user.email.split("@")[0]}</span>
-                        <VscAccount
+                    <div className="flex gap-3"
+                        onClick={() =>{
+                            setIsMenuOpen((prev) => !prev)
+                            console.log(user);
+                            }}> 
+                        {/* <span className="text-white cursor-pointer">{user.email.split("@")[0]}</span> */}
+                        <span className="text-white cursor-pointer flex itmes-center">{user.user_metadata.name}님</span>
+                        {user.user_metadata.avatar_url ? 
+                        <img src={user.user_metadata.avatar_url} 
+                            className="w-[2.1875em] h-[2.1875em] cursor-pointer rounded-full" 
+                        />
+                        : <VscAccount
                         //아이콘
                         size={35}
                         color="white"
                         className="cursor-pointer"
-                        />
+                        />}
                     </div>
 
                     {isMenuOpen && (
