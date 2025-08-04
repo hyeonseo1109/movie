@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useMovieStore, useMode, usePage } from "../store/movieStore"
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -65,6 +65,15 @@ export function MovieCard () {
     useEffect(() => {
         window.scrollTo({ top: 0 });
     }, [page]);
+
+    const swiperRef = useRef(null);
+
+    useEffect(() => {
+        if (activeMovies.length > 0 && swiperRef.current?.swiper) {
+            swiperRef.current.swiper.autoplay.start();
+        }
+    }, [activeMovies]);
+
     
 
 
@@ -111,6 +120,7 @@ export function MovieCard () {
         <div className={`w-full max-w-screen mx-auto px-4`}>
         { !debounceQuery && page === 1 && (
                 <Swiper
+                    ref={swiperRef}
                     modules={[Navigation, Scrollbar, Autoplay]}
                     navigation
                     scrollbar={{ draggable: true }}
