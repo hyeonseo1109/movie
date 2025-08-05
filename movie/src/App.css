@@ -188,6 +188,9 @@ html, body {
   .input {
     width: 5em;
   }
+  .tagline {
+    font-size: 1.25em;
+  }
 }
 
 @media (max-width: 650px) {
@@ -195,7 +198,7 @@ html, body {
     width: 7.5em;
   }
   .title {
-    font-size: 1.5em;
+    font-size: 1.4em;
   }
   .input {
     width: 4em;
