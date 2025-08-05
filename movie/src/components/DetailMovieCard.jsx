@@ -85,7 +85,7 @@ export function DetailMovieCard () {
                                 <span className="absolute top-[0.5em] right-[0.7em] text-[1.4em] text-[#fff] max-w-[25em] break-keep text-right tagline text-shadow-[0_0_5px_black]">{detailMovies?.tagline}</span>
                                 
 
-                                <div className="flex items-end px-6 mt-8 gap-4 z-20 relative justify-between">
+                                <div className="flex items-end px-6 mt-1.5 gap-4 z-20 relative justify-between">
                                     {detailMovies.poster_path? <img
                                         alt="작은사진"
                                         className="aspect-[2/3] w-[9em] m-2 h-auto shadow-[0_0_15px_black]"
