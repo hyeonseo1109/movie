@@ -85,7 +85,7 @@ export function DetailMovieCard () {
                                 <span className="absolute top-[0.5em] right-[0.7em] text-[1.4em] text-[#fff] max-w-[25em] break-keep text-right tagline text-shadow-[0_0_5px_black]">{detailMovies?.tagline}</span>
                                 
 
-                                <div className="flex items-end px-6 mt-1.5 gap-4 z-20 absolute bottom-1 justify-between">
+                                <div className="flex items-end px-8 mt-1.5 z-20 absolute bottom-1 justify-between w-full">
                                 {/* <div className="flex items-end px-6 mt-1.5 gap-4 z-20 relative justify-between"> */}
                                     {detailMovies.poster_path? <img
                                         alt="작은사진"
@@ -95,12 +95,12 @@ export function DetailMovieCard () {
                                         {/* <span className="text-[1em] text-white">상영시간: {detailMovies.runtime}분</span> */}
                                         {detailMovies.runtime!==0 ? <span className="text-[1em] text-white text-shadow-[0_0_5px_black]">상영시간: {detailMovies.runtime}분</span> : null }
                                         {detailMovies.vote_average!==0 ? <span className="text-[1em] text-white text-shadow-[0_0_5px_black]">★{detailMovies.vote_average}</span> : null }
-                                        <span className="font-bold title text-shadow-[0_0_5px_black]">{detailMovies.title}</span>
+                                        <span className="font-bold title text-shadow-[0_0_5px_black] whitespace-pre-wrap">{detailMovies.title}</span>
                                     </div>
                                 </div>
 
                             </div>
-                                <div className="px-3 leading-7 whitespace-pre-wrap relative bottom-1 z-20 bg-black w-full">
+                                <div className="p-3 leading-7 whitespace-pre-wrap relative bottom-1 z-20 bg-black w-full">
                                     {detailMovies.overview ? detailMovies.overview : <span>영화 설명이 없습니다.</span>}
                                 </div>
 
