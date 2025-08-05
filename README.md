@@ -14,4 +14,4 @@
 
 
 ## 페이지
-<a href="https://movies-12-zeta.vercel.app/" target="_blank">앱 바로가기</a>
+<a href="https://movies-12-zeta.vercel.app/">앱 바로가기</a>
