@@ -71,17 +71,16 @@ export function DetailMovieCard () {
                         </div>
                         <div className="w-full">
                             {/* <div className="relative w-[50em] mx-auto"> */}
-                            <div className="relative w-full max-w-[50em] mx-auto">
+                            <div className="relative w-full max-w-[50em] mx-auto aspect-[16/9]">
                                 {detailMovies.backdrop_path ? (<img
                                     className="w-full h-auto max-w-full"
                                     alt="배경이미지"
-                                    src={`https://image.tmdb.org/t/p/w500/${detailMovies.backdrop_path}`} />) : <div className="w-[50em] h-[30em] max-w-full background"></div>}
+                                    src={`https://image.tmdb.org/t/p/w500/${detailMovies.backdrop_path}`} />) : <div className="absolute w-full h-full background"></div>}
                                 <div 
                                     className="
-                                    bg-[linear-gradient(180deg,rgb(0,0,0,0.05)1%,rgb(0,0,0,0.2)5%,rgb(0,0,0,0.3)10%,rgb(0,0,0,0.45)15%,rgb(0,0,0,0.75)50%,rgb(0,0,0,0.98)80%)]
-                                    absolute top-[13.3em] left-0 w-full h-[15em] z-0
-                                    "
-                                    alt="흰박스"
+                                        bg-[linear-gradient(180deg,rgb(0,0,0,0.05)1%,rgb(0,0,0,0.2)5%,rgb(0,0,0,0.3)10%,rgb(0,0,0,0.45)15%,rgb(0,0,0,0.75)50%,rgb(0,0,0,0.98)80%)]
+                                        absolute bottom-0 left-0 w-full h-1/2 z-0
+                                        "
                                 ></div>
                                 <span className="absolute top-[0.5em] right-[0.7em] text-[1.4em] text-[#fff] max-w-[25em] break-keep text-right tagline text-shadow-[0_0_5px_black]">{detailMovies?.tagline}</span>
                                 
