@@ -18,8 +18,12 @@ export const useMovieStore = create((set) => ({
             },
         });
         const data = await res.json();
-
-        set({ movies: data.results});
+        console.log(data);
+        const uniqueResults = data.results.filter(
+            (movie, index, self) =>
+                index === self.findIndex((m) => m.id === movie.id)
+        );
+        set({ movies: uniqueResults });
     } catch (err) {
         console.error('에러:', err);
     }

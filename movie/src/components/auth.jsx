@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSupabase } from "../supabase/context";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Auth() {
   const { supabaseClient, isSignInMode, isDark, setUser } = useSupabase(); 

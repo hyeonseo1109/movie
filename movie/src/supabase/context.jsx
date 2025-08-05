@@ -23,11 +23,15 @@ export const SupabaseProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [likedMovieIds, setLikedMovieIds] = useState([]);
 
+    //supabase에서 찜한 영화 id 목록을 가져옴. 
     const fetchLikedMovies = async (userId) => {
         const { data, error } = await supabaseClient
             .from("like")
+            //'like' table에서
             .select("movie_id")
+            //movie_id 컬럼을 선택하고
             .eq("user_id", userId);
+        //user_id가 일치하는 데이터만 가져옴.
         console.log(likedMovieIds);
         if (error) {
             console.error("좋아요 목록 불러오기 실패:", error);
@@ -37,11 +41,16 @@ export const SupabaseProvider = ({ children }) => {
         }
     };
 
+
     // 영화 좋아요 추가
     const addLikedMovie = async (userId, movieId) => {
-        const { error } = await supabaseClient.from("like").insert([
-            { user_id: userId, movie_id: movieId },
-        ]);
+        const { error } = await supabaseClient
+            .from("like")
+            //'like' table에
+            .insert([
+            //새 데이터 추가
+                { user_id: userId, movie_id: movieId },
+            ]);
 
         if (error) {
             console.error("좋아요 추가 실패:", error);
@@ -89,12 +98,13 @@ export const SupabaseProvider = ({ children }) => {
 
         // 실시간 로그인/로그아웃 감지
         const { data: listener } = supabaseClient.auth.onAuthStateChange(
-             // supabaseClient.auth.onAuthStateChange는 로그인/로그아웃 이벤트를 감지?함
+            // supabaseClient.auth.onAuthStateChange는 로그인/로그아웃 이벤트를 감지?함
             (event, session) => {
                 if (session?.user) {
                     //유저 상태가 있으면
                     setIsLogined(true);
                     setUser(session.user);
+                    fetchLikedMovies(session.user.id);
                 } else {
                     setIsLogined(false);
                     setUser(null);
@@ -114,8 +124,8 @@ export const SupabaseProvider = ({ children }) => {
     // console.log('유저정보:', user)
 
     return (
-        <SupabaseContext.Provider value={{supabaseClient, isLogined, user, setUser, isSignInMode, setIsSignInMode, isDark, setIsDark, isLoading, setIsLoading, fetchLikedMovies, addLikedMovie, removeLikedMovie, likedMovieIds, setLikedMovieIds }}>
-        {/*이 컴포넌트 내부에서 useSupabse()를 호출하면
+        <SupabaseContext.Provider value={{ supabaseClient, isLogined, user, setUser, isSignInMode, setIsSignInMode, isDark, setIsDark, isLoading, setIsLoading, fetchLikedMovies, addLikedMovie, removeLikedMovie, likedMovieIds, setLikedMovieIds }}>
+            {/*이 컴포넌트 내부에서 useSupabse()를 호출하면
         value인 supabaseClient, isLogined, user... 를 받아옴.*/}
             {children}
             {/*하위 컴포넌트들 렌더링*/}

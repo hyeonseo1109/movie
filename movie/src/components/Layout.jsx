@@ -43,10 +43,9 @@ export default function Layout() {
 
     //검색어 입력 변경 처리
     const handleChange = (e) => {
-        const val = e.target.value;
-        setInput(val);
-        setSearchParams(val ? { query: val } : {});
-        //쿼리 파라미터를 입력값으로 업데이트
+        setInput(e.target.value);
+        setSearchParams(e.target.value ? { query: e.target.value } : {});
+        //쿼리 파라미터에 입력값을 넣어 업데이트
     };
 
     //검색어 초기화 함수
