@@ -179,14 +179,14 @@ html, body {
 
 @media (max-width: 700px) {
   html {
-    font-size: 15px;
+    font-size: 16px;
   }
 
   .title {
     font-size: 1.6em;
   }
   .input {
-    width: 5em;
+    width: 4em;
   }
 }
 
@@ -202,7 +202,7 @@ html, body {
   }
 }
 
-
+/* 
 @media (max-width: 550px) {
   .little {
     width: 6.5em;
@@ -218,4 +218,4 @@ html, body {
     width: 3em;
   }
 }
-
+ */

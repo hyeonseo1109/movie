@@ -107,7 +107,7 @@ export default function Layout() {
                     <input  
                         value={input}
                         onChange={handleChange}
-                        className="border-b border-white text-white shrink input"/>
+                        className="border-b border-white text-white input"/>
                     <span
                         onClick={clearSearch}
                         className="inline-block transform rotate-[110deg] text-white font-extrabold text-[1.3em] cursor-pointer">☌</span>
