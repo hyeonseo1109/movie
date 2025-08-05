@@ -126,13 +126,13 @@ export default function Layout() {
                         <span className="text-white cursor-pointer flex relative top-[0.2em]">{user.user_metadata.name}</span>
                         {user.user_metadata.avatar_url ? 
                         <img src={user.user_metadata.avatar_url} 
-                            className="w-[2.1875em] h-[2.1875em] cursor-pointer rounded-full object-cover" 
+                            className="w-[2.1875em] h-[2.1875em] cursor-pointer rounded-full object-cover profile" 
                         />
                         : <VscAccount
                         //아이콘
                         size={35}
                         color="white"
-                        className="cursor-pointer"
+                        className="cursor-pointer icon"
                         />}
                     </div>
 

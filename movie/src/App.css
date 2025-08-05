@@ -186,7 +186,7 @@ html, body {
     font-size: 1.6em;
   }
   .input {
-    width: 4em;
+    width: 5em;
   }
 }
 
@@ -199,6 +199,12 @@ html, body {
   }
   .input {
     width: 4em;
+  }
+  .icon {
+    display: none;
+  }
+  .profile {
+    display: none;
   }
 }
 
