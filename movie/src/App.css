@@ -1,4 +1,12 @@
-@import url('https://fastly.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.1/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css');
+@font-face {
+  font-family: 'S-CoreDream-3Light';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@import url('http://fonts.googleapis.com/earlyaccess/nanumgothic.css');
+
 
 html, body {
   margin: 0;
@@ -6,7 +14,7 @@ html, body {
   font-size: 16px;
   width: 100%;
   height: 100%;
-  font-family: 'Wanted Sans Variable', sans-serif;
+  font-family: 'Nanum Gothic', sans-serif;
 }
 
 #root {
