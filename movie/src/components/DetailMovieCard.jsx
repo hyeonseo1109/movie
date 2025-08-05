@@ -85,7 +85,7 @@ export function DetailMovieCard () {
                                 <span className="absolute top-[0.5em] right-[0.7em] text-[1.4em] text-[#fff] max-w-[25em] break-keep text-right tagline text-shadow-[0_0_5px_black]">{detailMovies?.tagline}</span>
                                 
 
-                                <div className="flex items-end px-6 mt-4 gap-4 z-20 relative">
+                                <div className="flex items-end px-6 mt-8 gap-4 z-20 relative justify-between">
                                     {detailMovies.poster_path? <img
                                         alt="작은사진"
                                         className="aspect-[2/3] w-[9em] m-2 h-auto shadow-[0_0_15px_black]"
@@ -99,7 +99,7 @@ export function DetailMovieCard () {
                                 </div>
 
                             </div>
-                                <div className="p-3 leading-7 whitespace-pre-wrap relative z-20 bg-black w-full">
+                                <div className="px-3 leading-7 whitespace-pre-wrap relative bottom-1 z-20 bg-black w-full">
                                     {detailMovies.overview ? detailMovies.overview : <span>영화 설명이 없습니다.</span>}
                                 </div>
 
