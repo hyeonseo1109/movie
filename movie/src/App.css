@@ -161,6 +161,9 @@
   .title {
     font-size: 1.7em;
   }
+  .input {
+    width: 5.5em;
+  }
 }
 
 
@@ -174,6 +177,9 @@
   .title {
     font-size: 1.6em;
   }
+  .input {
+    width: 5em;
+  }
 }
 
 @media (max-width: 650px) {
@@ -182,6 +188,9 @@
   }
   .title {
     font-size: 1.5em;
+  }
+  .input {
+    width: 4em;
   }
 }
 
