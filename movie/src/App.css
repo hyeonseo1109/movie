@@ -217,7 +217,7 @@ html, body {
 
 @media (max-width: 500px) {
   .little {
-    width: 6em;
+    width: 3em;
   }
   html {
     font-size: 14px;
