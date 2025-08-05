@@ -89,7 +89,7 @@ export function DetailMovieCard () {
                                 <div className="flex items-end px-6 mt-4 gap-4 z-20 justify-between relative marginChange">
                                     {detailMovies.poster_path? <img
                                         alt="작은사진"
-                                        className="aspect-[2/3] w-[9em] h-auto shadow-[0_0_15px_black] little"
+                                        className="aspect-[2/3] w-[9em] m-2 h-auto shadow-[0_0_15px_black] little"
                                         src={`https://image.tmdb.org/t/p/w500/${detailMovies.poster_path}`} /> : null}
                                     <div  className="flex flex-col gap-1 items-end">
                                         {/* <span className="text-[1em] text-white">상영시간: {detailMovies.runtime}분</span> */}

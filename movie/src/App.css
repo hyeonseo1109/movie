@@ -200,9 +200,6 @@ html, body {
   .title {
     font-size: 1.4em;
   }
-  .input {
-    width: 4em;
-  }
   .icon {
     display: none;
   }
@@ -216,7 +213,7 @@ html, body {
 
 @media (max-width: 500px) {
   .little {
-    width: 4.5em;
+    width: 6em;
   }
   html {
     font-size: 15px;
