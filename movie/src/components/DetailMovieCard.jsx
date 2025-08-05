@@ -93,9 +93,9 @@ export function DetailMovieCard () {
                                         src={`https://image.tmdb.org/t/p/w500/${detailMovies.poster_path}`} /> : null}
                                     <div  className="flex flex-col gap-1 items-end">
                                         {/* <span className="text-[1em] text-white">상영시간: {detailMovies.runtime}분</span> */}
-                                        {detailMovies.runtime!==0 ? <span className="text-[1em] text-white">상영시간: {detailMovies.runtime}분</span> : null }
-                                        {detailMovies.vote_average!==0 ? <span className="text-[1em] text-white">★{detailMovies.vote_average}</span> : null }
-                                        <span className="font-bold title">{detailMovies.title}</span>
+                                        {detailMovies.runtime!==0 ? <span className="text-[1em] text-white text-shadow-[0_0_5px_black]">상영시간: {detailMovies.runtime}분</span> : null }
+                                        {detailMovies.vote_average!==0 ? <span className="text-[1em] text-white text-shadow-[0_0_5px_black]">★{detailMovies.vote_average}</span> : null }
+                                        <span className="font-bold title text-shadow-[0_0_5px_black]">{detailMovies.title}</span>
                                     </div>
                                 </div>
 

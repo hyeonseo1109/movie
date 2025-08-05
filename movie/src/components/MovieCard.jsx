@@ -149,7 +149,7 @@ export function MovieCard () {
                                 <div className={`w-[10em] h-[15em] relative overflow-hidden flex mx-auto rounded-[0.8em] m-10 ${isDark ? "shadow-[0_0_20px_black]" : "shadow-[0_0_20px_rgb(152,152,152)]"}`}>
                                     {mv.poster_path? <img src={`${imgUrl}${mv.poster_path}`} /> : <div className="w-full h-full background"></div>}
                                     <div className="bg-[#000000c1] text-white absolute w-full h-[4em] bottom-[0.5em] shadow-[0_-0.3em_0.3em_rgba(255,255,255,0.3),_0_0.3em_0.3em_rgba(255,255,255,0.3)] flex flex-col justify-around">
-                                        <p className="text-[20px] leading-[1] flex justify-center text-center break-keep">{mv.title}</p>
+                                        <p className="text-[20px] leading-[1] flex justify-center text-center break-keep cardTitle">{mv.title}</p>
                                         <div className="flex flex-row justify-between items-end">
                                             <span
                                                 onClick={(e) => {
@@ -182,7 +182,7 @@ export function MovieCard () {
                     <div className="w-[10em] h-[15em] relative overflow-hidden flex rounded-[0.8em]">
                         {mv.poster_path? <img src={`${imgUrl}${mv.poster_path}`} /> : <div className="w-full h-full background"></div>}
                         <div className="bg-[#000000c1] text-white absolute w-full h-[4em] bottom-[0.5em] shadow-[0_-0.3em_0.3em_rgba(255,255,255,0.3),_0_0.3em_0.3em_rgba(255,255,255,0.3)] flex flex-col justify-around">
-                            <p className="text-[20px] leading-[1] flex justify-center text-center break-keep">{mv.title}</p>
+                            <p className="text-[1.25em] leading-[1] flex justify-center text-center break-keep  cardTitle">{mv.title}</p>
                             <div className="flex flex-row justify-between items-end ">
                                 <span
                                     onClick={(e) => {
