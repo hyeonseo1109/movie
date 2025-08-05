@@ -107,7 +107,7 @@ export default function Layout() {
                     <input  
                         value={input}
                         onChange={handleChange}
-                        className="border-b border-white text-white input"/>
+                        className="border-b border-white text-white shrink input"/>
                     <span
                         onClick={clearSearch}
                         className="inline-block transform rotate-[110deg] text-white font-extrabold text-[1.3em] cursor-pointer">☌</span>
@@ -123,7 +123,7 @@ export default function Layout() {
                             console.log(user);
                             }}> 
                         {/* <span className="text-white cursor-pointer">{user.email.split("@")[0]}</span> */}
-                        <span className="text-white cursor-pointer flex relative top-[0.2em] name">{user.user_metadata.name}</span>
+                        <span className="text-white cursor-pointer flex relative top-[0.2em]">{user.user_metadata.name}</span>
                         {user.user_metadata.avatar_url ? 
                         <img src={user.user_metadata.avatar_url} 
                             className="w-[2.1875em] h-[2.1875em] cursor-pointer rounded-full object-cover" 
