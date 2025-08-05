@@ -98,10 +98,10 @@ export function DetailMovieCard () {
                                     </div>
                                 </div>
 
-                                <div className="p-3 leading-7 break-keep relative z-20 bg-black w-full">
+                            </div>
+                                <div className="p-3 leading-7 whitespace-pre-wrap relative z-20 bg-black w-full">
                                     {detailMovies.overview ? detailMovies.overview : <span>영화 설명이 없습니다.</span>}
                                 </div>
-                            </div>
 
                         </div>
                     </div>
