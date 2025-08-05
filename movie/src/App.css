@@ -218,6 +218,9 @@ html, body {
   .little {
     width: 6em;
   }
+  html {
+    font-size: 15px;
+  }
 }
 
 
