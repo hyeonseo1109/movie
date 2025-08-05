@@ -211,10 +211,10 @@ html, body {
   }
 }
 
-/* 
-@media (max-width: 550px) {
+
+@media (max-width: 500px) {
   .little {
-    width: 6.5em;
+    width: 6em;
   }
   html {
     font-size: 14px;
@@ -227,4 +227,4 @@ html, body {
     width: 3em;
   }
 }
- */
+
