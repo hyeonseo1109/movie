@@ -85,11 +85,11 @@ export function DetailMovieCard () {
                                 <span className="absolute top-[0.5em] right-[0.7em] text-[1.4em] text-[#fff] max-w-[25em] break-keep text-right tagline text-shadow-[0_0_5px_black]">{detailMovies?.tagline}</span>
                                 
 
-                                <div className="flex items-end px-8 mt-1.5 z-20 absolute bottom-1 justify-between w-full">
+                                <div className="flex items-end px-8 mt-1.5 z-20 absolute bottom-1 justify-between w-full imgNdescription">
                                 {/* <div className="flex items-end px-6 mt-1.5 gap-4 z-20 relative justify-between"> */}
                                     {detailMovies.poster_path? <img
                                         alt="작은사진"
-                                        className="aspect-[2/3] w-[9em] m-2 h-auto shadow-[0_0_15px_black]"
+                                        className="aspect-[2/3] w-full max-w-[9em] m-2 h-auto shadow-[0_0_15px_black] img"
                                         src={`https://image.tmdb.org/t/p/w500/${detailMovies.poster_path}`} /> : null}
                                     <div  className="flex flex-col gap-1 items-end text-white text-shadow-[0_0_5px_black]">
                                         {/* <span className="text-[1em] text-white">상영시간: {detailMovies.runtime}분</span> */}
