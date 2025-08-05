@@ -14,4 +14,4 @@
 
 
 ## 페이지
-[https://piano-rho-six.vercel.app/](https://movies-12-zeta.vercel.app/)
+<a href="https://movies-12-zeta.vercel.app/" target="_blank">앱 바로가기</a>
