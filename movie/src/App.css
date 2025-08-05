@@ -214,6 +214,12 @@ html, body {
   }
 }
 
+@media (max-width: 500px) {
+  .little {
+    width: 6em;
+  }
+}
+
 
 @media (max-width: 450px) {
   .little {
