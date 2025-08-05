@@ -83,7 +83,7 @@ export function DetailMovieCard () {
                                     "
                                     alt="흰박스"
                                 ></div>
-                                <span className="absolute top-[0.5em] right-[0.7em] text-[1.4em] text-[#fff] max-w-[25em] break-keep text-right tagline">{detailMovies?.tagline}</span>
+                                <span className="absolute top-[0.5em] right-[0.7em] text-[1.4em] text-[#fff] max-w-[25em] break-keep text-right tagline text-shadow-[0_0_5px_black]">{detailMovies?.tagline}</span>
                                 
 
                                 <div className="flex items-end px-6 mt-4 gap-4 z-20 justify-between relative marginChange">
