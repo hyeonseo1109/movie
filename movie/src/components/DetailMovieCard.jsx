@@ -70,12 +70,11 @@ export function DetailMovieCard () {
                                     >#{gr?.name}</Link>)}
                         </div>
                         <div className="w-full">
-                            {/* <div className="relative w-[50em] mx-auto"> */}
-                            <div className="relative w-full max-w-[50em] mx-auto aspect-[16/9]">
+                            <div className="relative w-full max-w-[50em] mx-auto aspect-[16/9] overflow-hidden">
                                 {detailMovies.backdrop_path ? (<img
-                                    className="w-full h-auto max-w-full"
+                                    className="absolute inset-0 w-full h-full object-cover"
                                     alt="배경이미지"
-                                    src={`https://image.tmdb.org/t/p/w500/${detailMovies.backdrop_path}`} />) : <div className="absolute w-full h-full background"></div>}
+                                    src={`https://image.tmdb.org/t/p/w500/${detailMovies.backdrop_path}`} />) : <div className="absolute inset-0 background"></div>}
                                 <div 
                                     className="
                                         bg-[linear-gradient(180deg,rgb(0,0,0,0.05)1%,rgb(0,0,0,0.2)5%,rgb(0,0,0,0.3)10%,rgb(0,0,0,0.45)15%,rgb(0,0,0,0.75)50%,rgb(0,0,0,0.98)80%)]
