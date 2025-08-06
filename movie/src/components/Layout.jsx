@@ -3,9 +3,11 @@ import { useState, useEffect, useRef } from "react";
 import { useSupabase } from "../supabase/context";
 import { VscAccount } from "react-icons/vsc";
 import { useLocation } from "react-router-dom";
+import { useLikedMovieStore } from "../store/movieStore";
 
 export default function Layout() {
     const [searchParams, setSearchParams] = useSearchParams();
+    const setLikedMovies = useLikedMovieStore(state => state.setLikedMovies);
     //url 쿼리 파라미터를 가져오고 설정함
     const query = searchParams.get("query") || '';
     const [input, setInput] = useState(query);
@@ -60,6 +62,7 @@ export default function Layout() {
         if (!error) {
             navigate("/"); 
             // 로그아웃 후 홈으로 이동
+            setLikedMovies([]);
         } else {
             alert("로그아웃에 실패했습니다.");
         }
@@ -103,6 +106,7 @@ export default function Layout() {
             </nav>
             <div className="flex flex-row gap-7 items-center">
                 <div>
+                    {/*검색기능*/}
                     <input  
                         value={input}
                         onChange={handleChange}
@@ -116,7 +120,7 @@ export default function Layout() {
                 <div ref={menuRef} className="relative">
                     {/*클릭 이벤트가 있을 때 화면 전체에 버블링됨, 
                     contains()로 클릭된 대상이 모달 내부인지 판단함.*/}
-                    <div className="flex gap-3 itmes-center"
+                    <div className="flex gap-3 items-center"
                         onClick={() =>{
                             setIsMenuOpen((prev) => !prev)
                             console.log(user);

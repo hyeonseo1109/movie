@@ -98,7 +98,7 @@ export const useMode = create((set) => ({
     setSortMode: (mode) => set({ sortMode: mode }),
 }));
 
-// 페이지 몇 번째인지
+// 페이지네이션
 export const usePage = create((set) => ({
     page: 1, 
     setPage: (num) => set({ page: num }),

@@ -124,6 +124,7 @@ export default function Auth() {
 
   };
 
+  //구글로그인
   const signInWithGoogle = async () => {
     setError(null);
     setMessage(null);
