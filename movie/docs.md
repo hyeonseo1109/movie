@@ -41,9 +41,9 @@ useState로 isDark 상태 지정
 : {`${isDark ? "background" : "bg-white" }`}
 
 
-<장르> (DetailMovieCard.jsx, Genre.jsx, ㅡㅐ퍋)
+<장르> (DetailMovieCard.jsx, Genre.jsx)
 <Route path="detail/:id/:genreId" ... />
-API로 받아온 데이터의 장르를 Link 연결해서 렌더링
+DetailMovieCard.jsx에서 API로 받아온 데이터의 장르를 Link 연결해서 렌더링
 -> Genre.jsx에서 useParams를 이용해 
 http://localhost:5173/detail/1100988/27
 detail/ 뒤의 아이디를 받아와 fetchRecommendedMovie에 인자로 주며 호출함. 
